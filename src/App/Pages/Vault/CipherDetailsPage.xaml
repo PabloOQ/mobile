@@ -107,6 +107,7 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Label
                                     Text="{u:I18n Password}"
@@ -128,10 +129,21 @@
                                     IsVisible="{Binding ShowPassword}" />
                                 <controls:IconButton
                                     StyleClass="box-row-button, box-row-button-platform"
+                                    Text="{Binding Source={x:Static core:BitwardenIcons.Send}}"
+                                    Command="{Binding CopyCommand}"
+                                    CommandParameter="LoginPassword"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Grid.RowSpan="2"
+                                    AutomationProperties.IsInAccessibleTree="True"
+                                    AutomationProperties.Name="{u:I18n CopyPassword}"
+                                    IsVisible="{Binding Cipher.ViewPassword}" />
+                                <controls:IconButton
+                                    StyleClass="box-row-button, box-row-button-platform"
                                     Text="{Binding Source={x:Static core:BitwardenIcons.CheckCircle}}"
                                     Command="{Binding CheckPasswordCommand}"
                                     Grid.Row="0"
-                                    Grid.Column="1"
+                                    Grid.Column="2"
                                     Grid.RowSpan="2"
                                     AutomationProperties.IsInAccessibleTree="True"
                                     AutomationProperties.Name="{u:I18n CheckPassword}"
@@ -141,7 +153,7 @@
                                     Text="{Binding ShowPasswordIcon}"
                                     Command="{Binding TogglePasswordCommand}"
                                     Grid.Row="0"
-                                    Grid.Column="2"
+                                    Grid.Column="3"
                                     Grid.RowSpan="2"
                                     AutomationProperties.IsInAccessibleTree="True"
                                     AutomationProperties.Name="{u:I18n ToggleVisibility}"
@@ -153,7 +165,7 @@
                                     Command="{Binding CopyCommand}"
                                     CommandParameter="LoginPassword"
                                     Grid.Row="0"
-                                    Grid.Column="3"
+                                    Grid.Column="4"
                                     Grid.RowSpan="2"
                                     AutomationProperties.IsInAccessibleTree="True"
                                     AutomationProperties.Name="{u:I18n CopyPassword}"
