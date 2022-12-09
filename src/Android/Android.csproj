@@ -218,6 +218,10 @@
     <AndroidResource Include="Resources\drawable\splash_screen.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\InputStick\InputStick.csproj">
+      <Project>{9e4511f0-eed6-4a33-a1a5-6785c669df59}</Project>
+      <Name>InputStick</Name>
+    </ProjectReference>
     <ProjectReference Include="..\App\App.csproj">
       <Project>{EE44C6A1-2A85-45FE-8D9B-BF1D5F88809C}</Project>
       <Name>App</Name>
