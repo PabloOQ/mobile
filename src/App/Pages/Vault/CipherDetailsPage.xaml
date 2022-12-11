@@ -130,7 +130,7 @@
                                 <controls:IconButton
                                     StyleClass="box-row-button, box-row-button-platform"
                                     Text="{Binding Source={x:Static core:BitwardenIcons.Send}}"
-                                    Command="{Binding CopyCommand}"
+                                    Command="{Binding AutoTypeCommand}"
                                     CommandParameter="LoginPassword"
                                     Grid.Row="0"
                                     Grid.Column="1"
