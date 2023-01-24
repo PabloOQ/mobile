@@ -83,5 +83,6 @@
         public static string ProtectedPinKey(string userId) => $"protectedPin_{userId}";
         public static string LastSyncKey(string userId) => $"lastSync_{userId}";
         public static string BiometricUnlockKey(string userId) => $"biometricUnlock_{userId}";
+        public static string AutoTyperEnableKey(string userId) => $"autoTyperEnabled_{userId}";
     }
 }

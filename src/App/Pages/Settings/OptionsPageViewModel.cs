@@ -5,6 +5,7 @@ using Bit.App.Utilities;
 using Bit.Core;
 using Bit.Core.Abstractions;
 using Bit.Core.Enums;
+using Bit.Core.Services;
 using Bit.Core.Utilities;
 using Xamarin.Forms;
 
@@ -27,6 +28,7 @@ namespace Bit.App.Pages
         private bool _inited;
         private bool _updatingAutofill;
         private bool _showAndroidAutofillSettings;
+        private bool _autoTyperEnabled;
 
         public OptionsPageViewModel()
         {
@@ -179,6 +181,18 @@ namespace Bit.App.Pages
             set => SetProperty(ref _showAndroidAutofillSettings, value);
         }
 
+        public bool AutoTyperEnabled
+        {
+            get => _autoTyperEnabled;
+            set
+            {
+                if (SetProperty(ref _autoTyperEnabled, value))
+                {
+                    UpdateAutoTyperEnabledAsync().FireAndForget();
+                }
+            }
+        }
+
         public async Task InitAsync()
         {
             AutofillSavePrompt = !(await _stateService.GetAutofillDisableSavePromptAsync()).GetValueOrDefault();
@@ -195,6 +209,7 @@ namespace Bit.App.Pages
                 UriMatchOptions.FindIndex(k => (int?)k.Key == defaultUriMatch);
             var clearClipboard = await _stateService.GetClearClipboardAsync();
             ClearClipboardSelectedIndex = ClearClipboardOptions.FindIndex(k => k.Key == clearClipboard);
+            AutoTyperEnabled = !(await _stateService.GetAutoTyperEnableAsync()).GetValueOrDefault();
             _inited = true;
         }
 
@@ -284,6 +299,13 @@ namespace Bit.App.Pages
                     AutofillBlockedUris = string.Join(", ", urisList);
                 }
                 catch { }
+            }
+        }
+        private async Task UpdateAutoTyperEnabledAsync()
+        {
+            if (_inited)
+            {
+                await _stateService.SetAutoTyperEnableAsync(!AutoTyperEnabled);
             }
         }
     }
