@@ -2317,4 +2317,7 @@ select Add TOTP to store the key safely</value>
   <data name="AutoTyperServices" xml:space="preserve">
     <value>AutoTyper services</value>
   </data>
+  <data name="AutoTyper" xml:space="preserve">
+    <value>AutoTyper</value>
+  </data>
 </root>

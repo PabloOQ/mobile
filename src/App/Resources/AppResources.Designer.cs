@@ -1955,6 +1955,13 @@ namespace Bit.App.Resources {
             }
         }
 
+        public static string AutoTyper {
+            get
+            {
+                return ResourceManager.GetString("AutoTyper", resourceCulture);
+            }
+        }
+
         public static string AutoTyperServices
         {
             get {
