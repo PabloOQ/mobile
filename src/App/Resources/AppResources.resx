@@ -2314,4 +2314,7 @@ select Add TOTP to store the key safely</value>
   <data name="AreYouSureYouWantToEnableScreenCapture" xml:space="preserve">
     <value>Are you sure you want to enable Screen Capture?</value>
   </data>
+  <data name="AutoTyperServices" xml:space="preserve">
+    <value>AutoTyper services</value>
+  </data>
 </root>

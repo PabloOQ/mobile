@@ -1954,7 +1954,14 @@ namespace Bit.App.Resources {
                 return ResourceManager.GetString("AutofillWithBitwarden", resourceCulture);
             }
         }
-        
+
+        public static string AutoTyperServices
+        {
+            get {
+                return ResourceManager.GetString("AutoTyperServices", resourceCulture);
+            }
+        }
+
         public static string VaultIsLocked {
             get {
                 return ResourceManager.GetString("VaultIsLocked", resourceCulture);
