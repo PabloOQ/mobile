@@ -477,7 +477,7 @@ namespace Bit.App.Pages
                 {
                     Name = AppResources.AutoTyperServices,
                     SubLabel = _deviceActionService.AutofillServicesEnabled() ? AppResources.On : AppResources.Off,
-                    ExecuteAsync = () => Page.Navigation.PushModalAsync(new NavigationPage(new AutofillServicesPage(Page as SettingsPage)))
+                    ExecuteAsync = () => Page.Navigation.PushModalAsync(new NavigationPage(new AutoTyperServicesPage(Page as SettingsPage)))
                 });
             }
             var manageItems = new List<SettingsPageListItem>
