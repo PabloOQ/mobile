@@ -10,6 +10,10 @@
     <ContentPage.BindingContext>
         <pages:AutoTyperServicesPageViewModel />
     </ContentPage.BindingContext>
-
+    <ScrollView>
+        <StackLayout Padding="0" Spacing="20">
+            
+        </StackLayout>
+    </ScrollView>
 
 </pages:BaseContentPage>
