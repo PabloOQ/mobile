@@ -476,7 +476,7 @@ namespace Bit.App.Pages
                 autoTyperItems.Add(new SettingsPageListItem
                 {
                     Name = AppResources.AutoTyperServices,
-                    SubLabel = _deviceActionService.AutofillServicesEnabled() ? AppResources.On : AppResources.Off,
+                    SubLabel = "TODO",
                     ExecuteAsync = () => Page.Navigation.PushModalAsync(new NavigationPage(new AutoTyperServicesPage(Page as SettingsPage)))
                 });
             }
