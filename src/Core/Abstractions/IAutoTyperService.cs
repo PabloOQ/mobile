@@ -9,8 +9,8 @@ namespace Bit.Core.Abstractions
     {
         IAutoTyper typer { get; set; }
         void Type(String text);
-        Layout GetLayout();
-        void SetLayout(Layout layout);
+        LayoutType GetLayout();
+        void SetLayout(LayoutType layout);
         int GetSpeed();
         void SetSpeed(int speed);
     }

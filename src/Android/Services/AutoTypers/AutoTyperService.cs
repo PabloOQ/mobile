@@ -29,8 +29,8 @@ namespace Bit.Droid.Services.AutoTypers
             typer.Type(text);
         }
 
-        public Layout GetLayout() => typer.layout;
-        public void SetLayout(Layout layout) => typer.layout = layout;
+        public LayoutType GetLayout() => typer.layout;
+        public void SetLayout(LayoutType layout) => typer.layout = layout;
         public int GetSpeed() => typer.speed;
         public void SetSpeed(int speed) => typer.speed = speed;
     }

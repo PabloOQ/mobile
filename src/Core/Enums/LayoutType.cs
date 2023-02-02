@@ -1,6 +1,6 @@
 ﻿namespace Bit.Core.Enums
 {
-    public enum Layout
+    public enum LayoutType
     {
         fr_BE       , // French (Belgian)
         hr_HR       , // Croatian (Croatia)
@@ -29,6 +29,6 @@
         pt_PT       , // Portuguese (Portugal)
         ru_RU       , // Russian (Russia)
         sk_SK       , // Slovak (Slovakia)
-        sv_SE         // Swedish (Sweden)
+        sv_SE       , // Swedish (Sweden)
     }
 }

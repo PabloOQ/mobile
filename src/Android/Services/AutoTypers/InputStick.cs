@@ -17,7 +17,7 @@ namespace Bit.Droid.Services.AutoTypers
 {
     public class InputStick : IAutoTyper
     {
-        public Layout layout { get; set; } = Layout.en_US;
+        public LayoutType layout { get; set; } = LayoutType.en_US;
         public int speed { get; set; } = 1;
         public void Type(String text)
         {
@@ -25,65 +25,65 @@ namespace Bit.Droid.Services.AutoTypers
             InputStickBroadcast.Type(context,text,"es-ES",speed);
         }
 
-        private String LayoutString(Layout layout)
+        private String LayoutString(LayoutType layout)
         {
             switch (layout)
             {
-                case Layout.fr_BE:
+                case LayoutType.fr_BE:
                     return "fr-BE";
-                case Layout.hr_HR:
+                case LayoutType.hr_HR:
                     return "hr-HR";
-                case Layout.cs_CZ:
+                case LayoutType.cs_CZ:
                     return "cs-CZ";
-                case Layout.da_DK:
+                case LayoutType.da_DK:
                     return "da-DK";
-                case Layout.nl_NL:
+                case LayoutType.nl_NL:
                     return "nl-NL";
-                case Layout.de_CH:
+                case LayoutType.de_CH:
                     return "de-CH";
-                case Layout.de_DE:
+                case LayoutType.de_DE:
                     return "de-DE";
-                case Layout.de_DE_MAC:
+                case LayoutType.de_DE_MAC:
                     return "de-DE-MAC";
-                case Layout.el_GR:
+                case LayoutType.el_GR:
                     return "el-GR";
-                case Layout.en_US_DV:
+                case LayoutType.en_US_DV:
                     return "en-US-DV";
-                case Layout.en_GB:
+                case LayoutType.en_GB:
                     return "en-GB";
-                case Layout.en_US:
+                case LayoutType.en_US:
                     return "en-US";
-                case Layout.en_US_INT:
+                case LayoutType.en_US_INT:
                     return "en-US-INT";
-                case Layout.es_ES:
+                case LayoutType.es_ES:
                     return "es-ES";
-                case Layout.fi_FI:
+                case LayoutType.fi_FI:
                     return "fi-FI";
-                case Layout.fr_CA:
+                case LayoutType.fr_CA:
                     return "fr-CA";
-                case Layout.fr_CH:
+                case LayoutType.fr_CH:
                     return "fr-CH";
-                case Layout.fr_FR:
+                case LayoutType.fr_FR:
                     return "fr-FR";
-                case Layout.he_IL:
+                case LayoutType.he_IL:
                     return "he-IL";
-                case Layout.hu_HU:
+                case LayoutType.hu_HU:
                     return "hu-HU";
-                case Layout.it_IT:
+                case LayoutType.it_IT:
                     return "it-IT";
-                case Layout.nb_NO:
+                case LayoutType.nb_NO:
                     return "nb-NO";
-                case Layout.pl_PL:
+                case LayoutType.pl_PL:
                     return "pl-PL";
-                case Layout.pt_BR:
+                case LayoutType.pt_BR:
                     return "pt-BR";
-                case Layout.pt_PT:
+                case LayoutType.pt_PT:
                     return "pt-PT";
-                case Layout.ru_RU:
+                case LayoutType.ru_RU:
                     return "ru-RU";
-                case Layout.sk_SK:
+                case LayoutType.sk_SK:
                     return "sk-SK";
-                case Layout.sv_SE:
+                case LayoutType.sv_SE:
                     return "sv-SE";
                 default:
                     return null;

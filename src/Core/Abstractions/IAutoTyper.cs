@@ -7,7 +7,7 @@ namespace Bit.Core.Abstractions
 {
     public interface IAutoTyper
     {
-        Layout layout { get; set; }
+        LayoutType layout { get; set; }
         int speed { get; set; }
         void Type(String text);
     }
