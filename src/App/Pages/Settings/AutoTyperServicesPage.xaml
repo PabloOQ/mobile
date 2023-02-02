@@ -12,7 +12,17 @@
     </ContentPage.BindingContext>
     <ScrollView>
         <StackLayout Padding="0" Spacing="20">
-            
+            <StackLayout StyleClass="box">
+                <StackLayout StyleClass="box-row, box-row-input, box-row-input-options-platform">
+                    <Label
+                        Text="{u:I18n Theme}"
+                        StyleClass="box-label" />
+
+                </StackLayout>
+                <Label
+                    StyleClass="box-footer-label"
+                    Text="{u:I18n AutoTyperDescription}" />
+            </StackLayout>
         </StackLayout>
     </ScrollView>
 

@@ -1962,11 +1962,11 @@ namespace Bit.App.Resources {
             }
         }
 
-        public static string AutoTyperDesc
+        public static string AutoTyperDescription
         {
             get
             {
-                return ResourceManager.GetString("AutoTyperDesc", resourceCulture);
+                return ResourceManager.GetString("AutoTyperDescription", resourceCulture);
             }
         }
         

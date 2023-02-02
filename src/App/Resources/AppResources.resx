@@ -2320,7 +2320,7 @@ select Add TOTP to store the key safely</value>
   <data name="AutoTyper" xml:space="preserve">
     <value>AutoTyper</value>
   </data>
-  <data name="AutoTyperDesc" xml:space="preserve">
+  <data name="AutoTyperDescription" xml:space="preserve">
     <value>Service to type passwords wirelessly, additional hardware might be required</value>
   </data>
   <data name="AutoTyperInputStick" xml:space="preserve">
