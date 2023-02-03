@@ -1244,6 +1244,22 @@ namespace Bit.Core.Services
             await SetValueAsync(key, value, reconciledOptions);
         }
 
+        public async Task<int?> GetAutoTyperServiceAsync(string userId = null)
+        {
+            var reconciledOptions = ReconcileOptions(new StorageOptions { UserId = userId },
+                await GetDefaultStorageOptionsAsync());
+            var key = Constants.AutoTyperServiceKey(reconciledOptions.UserId);
+            return await GetValueAsync<int?>(key, reconciledOptions);
+        }
+
+        public async Task SetAutoTyperService(int? value, string userId = null)
+        {
+            var reconciledOptions = ReconcileOptions(new StorageOptions { UserId = userId },
+                await GetDefaultStorageOptionsAsync());
+            var key = Constants.AutoTyperServiceKey(reconciledOptions.UserId);
+            await SetValueAsync(key, value, reconciledOptions);
+        }
+
         // Helpers
 
         private async Task<T> GetValueAsync<T>(string key, StorageOptions options)

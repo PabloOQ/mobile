@@ -15,9 +15,13 @@
             <StackLayout StyleClass="box">
                 <StackLayout StyleClass="box-row, box-row-input, box-row-input-options-platform">
                     <Label
-                        Text="{u:I18n Theme}"
+                        Text="{u:I18n AutoTyperService}"
                         StyleClass="box-label" />
-
+                    <Picker
+                        x:Name="_autoTyperPicker"
+                        ItemsSource="{Binding AutoTyperServiceOptions, Mode=OneTime}"
+                        SelectedIndex="{Binding AutoTyperSelectedIndex}"
+                        StyleClass="box-value" />
                 </StackLayout>
                 <Label
                     StyleClass="box-footer-label"
