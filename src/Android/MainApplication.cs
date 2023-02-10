@@ -24,6 +24,7 @@ using Bit.App.Controls;
 #if !FDROID
 using Android.Gms.Security;
 #endif
+using Bit.Droid.Services.AutoTypers;
 
 namespace Bit.Droid
 {
@@ -157,6 +158,7 @@ namespace Bit.Droid
             var cryptoFunctionService = new PclCryptoFunctionService(cryptoPrimitiveService);
             var cryptoService = new CryptoService(stateService, cryptoFunctionService);
             var passwordRepromptService = new MobilePasswordRepromptService(platformUtilsService, cryptoService);
+            var autoTyperService = new AutoTyperService();
 
             ServiceContainer.Register<IBroadcasterService>("broadcasterService", broadcasterService);
             ServiceContainer.Register<IMessagingService>("messagingService", messagingService);
@@ -177,6 +179,7 @@ namespace Bit.Droid
             ServiceContainer.Register<ICryptoService>("cryptoService", cryptoService);
             ServiceContainer.Register<IPasswordRepromptService>("passwordRepromptService", passwordRepromptService);
             ServiceContainer.Register<IAvatarImageSourcePool>("avatarImageSourcePool", new AvatarImageSourcePool());
+            ServiceContainer.Register<IAutoTyperService>("autoTyperService", autoTyperService);
 
             // Push
 #if FDROID

@@ -109,6 +109,9 @@
     <Compile Update="Pages\Vault\GroupingsPage\GroupingsPage.xaml.cs">
       <DependentUpon>GroupingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Settings\AutoTyperServicesPage.xaml.cs">
+      <DependentUpon>AutoTyperServicesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\Accounts\LoginSsoPage.xaml.cs">
       <DependentUpon>LoginSsoPage.xaml</DependentUpon>
       <SubType>Code</SubType>

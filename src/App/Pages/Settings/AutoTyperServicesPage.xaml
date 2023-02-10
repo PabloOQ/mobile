@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:BaseContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Bit.App.Pages.AutoTyperServicesPage"
+    xmlns:pages="clr-namespace:Bit.App.Pages"
+    xmlns:u="clr-namespace:Bit.App.Utilities"
+    x:DataType="pages:AutoTyperServicesPageViewModel"
+    Title="{Binding PageTitle}">
+    <ContentPage.BindingContext>
+        <pages:AutoTyperServicesPageViewModel />
+    </ContentPage.BindingContext>
+    <ScrollView>
+        <StackLayout Padding="0" Spacing="20">
+            <StackLayout StyleClass="box">
+                <StackLayout StyleClass="box-row, box-row-input, box-row-input-options-platform">
+                    <Label
+                        Text="{u:I18n AutoTyperService}"
+                        StyleClass="box-label" />
+                    <Picker
+                        x:Name="_autoTyperPicker"
+                        ItemsSource="{Binding AutoTyperServiceOptions, Mode=OneTime}"
+                        SelectedIndex="{Binding AutoTyperSelectedIndex}"
+                        StyleClass="box-value" />
+                </StackLayout>
+                <Label
+                    StyleClass="box-footer-label"
+                    Text="{u:I18n AutoTyperDescription}" />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+
+</pages:BaseContentPage>

@@ -165,5 +165,7 @@ namespace Bit.Core.Abstractions
         Task<string> GetAvatarColorAsync(string userId = null);
 
 
+        Task<int?> GetAutoTyperServiceAsync(string userId = null);
+        Task SetAutoTyperService(int? value, string userId = null);
     }
 }

@@ -513,6 +513,16 @@ namespace Bit.App.Pages
                     ExecuteAsync = () => Page.Navigation.PushModalAsync(new NavigationPage(new ExtensionPage()))
                 });
             }
+            var autoTyperItems = new List<SettingsPageListItem>();
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                autoTyperItems.Add(new SettingsPageListItem
+                {
+                    Name = AppResources.AutoTyperServices,
+                    SubLabel = "TODO",
+                    ExecuteAsync = () => Page.Navigation.PushModalAsync(new NavigationPage(new AutoTyperServicesPage(Page as SettingsPage)))
+                });
+            }
             var manageItems = new List<SettingsPageListItem>
             {
                 new SettingsPageListItem
@@ -711,6 +721,7 @@ namespace Bit.App.Pages
             var settingsListGroupItems = new List<SettingsPageListGroup>()
             {
                 new SettingsPageListGroup(autofillItems, AppResources.Autofill, doUpper, true),
+                new SettingsPageListGroup(autoTyperItems, AppResources.AutoTyper, doUpper),
                 new SettingsPageListGroup(manageItems, AppResources.Manage, doUpper),
                 new SettingsPageListGroup(securityItems, AppResources.Security, doUpper),
                 new SettingsPageListGroup(accountItems, AppResources.Account, doUpper),

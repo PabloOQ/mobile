@@ -32,6 +32,7 @@ namespace Bit.App.Pages
         private readonly ICustomFieldItemFactory _customFieldItemFactory;
         private readonly IClipboardService _clipboardService;
         private readonly IWatchDeviceService _watchDeviceService;
+        private readonly IAutoTyperService _autoTyperService;
 
         private List<ICustomFieldItemViewModel> _fields;
         private bool _canAccessPremium;
@@ -64,10 +65,12 @@ namespace Bit.App.Pages
             _customFieldItemFactory = ServiceContainer.Resolve<ICustomFieldItemFactory>("customFieldItemFactory");
             _clipboardService = ServiceContainer.Resolve<IClipboardService>("clipboardService");
             _watchDeviceService = ServiceContainer.Resolve<IWatchDeviceService>();
+            _autoTyperService = ServiceContainer.Resolve<IAutoTyperService>("autoTyperService");
 
             CopyCommand = new AsyncCommand<string>((id) => CopyAsync(id, null), onException: ex => _logger.Exception(ex), allowsMultipleExecutions: false);
             CopyUriCommand = new AsyncCommand<LoginUriView>(uriView => CopyAsync("LoginUri", uriView.Uri), onException: ex => _logger.Exception(ex), allowsMultipleExecutions: false);
             CopyFieldCommand = new AsyncCommand<FieldView>(field => CopyAsync(field.Type == FieldType.Hidden ? "H_FieldValue" : "FieldValue", field.Value), onException: ex => _logger.Exception(ex), allowsMultipleExecutions: false);
+            AutoTypeCommand = new AsyncCommand<string>((id) => AutoTypeAsync(id, null), onException: ex => _logger.Exception(ex), allowsMultipleExecutions: false);
             LaunchUriCommand = new Command<LoginUriView>(LaunchUri);
             TogglePasswordCommand = new Command(TogglePassword);
             ToggleCardNumberCommand = new Command(ToggleCardNumber);
@@ -80,6 +83,7 @@ namespace Bit.App.Pages
         public ICommand CopyCommand { get; set; }
         public ICommand CopyUriCommand { get; set; }
         public ICommand CopyFieldCommand { get; set; }
+        public ICommand AutoTypeCommand { get; set; }
         public Command LaunchUriCommand { get; set; }
         public Command TogglePasswordCommand { get; set; }
         public Command ToggleCardNumberCommand { get; set; }
@@ -666,6 +670,51 @@ namespace Bit.App.Pages
                     await _eventService.CollectAsync(Core.Enums.EventType.Cipher_ClientCopiedHiddenField, CipherId);
                 }
             }
+        }
+
+        private async Task AutoTypeAsync(string id, string text = null)
+        {
+            if (_passwordRepromptService.ProtectedFields.Contains(id) && !await PromptPasswordAsync())
+            {
+                return;
+            }
+
+            string name = null;
+            if (id == "LoginUsername")
+            {
+                text = Cipher.Login.Username;
+                name = AppResources.Username;
+            }
+            else if (id == "LoginPassword")
+            {
+                text = Cipher.Login.Password;
+                name = AppResources.Password;
+            }
+            else if (id == "LoginTotp")
+            {
+                text = TotpCodeFormatted.Replace(" ", string.Empty);
+                name = AppResources.VerificationCodeTotp;
+            }
+            else if (id == "LoginUri")
+            {
+                name = AppResources.URI;
+            }
+            else if (id == "FieldValue" || id == "H_FieldValue")
+            {
+                name = AppResources.Value;
+            }
+            else if (id == "CardNumber")
+            {
+                text = Cipher.Card.Number;
+                name = AppResources.Number;
+            }
+            else if (id == "CardCode")
+            {
+                text = Cipher.Card.Code;
+                name = AppResources.SecurityCode;
+            }
+
+            _autoTyperService.Type(text);
         }
 
         private void LaunchUri(LoginUriView uri)
