@@ -106,7 +106,8 @@ namespace Bit.App.Pages
             nameof(ShowIdentityAddress),
             nameof(IsDeleted),
             nameof(CanEdit),
-            nameof(ShowUpgradePremiumTotpText)
+            nameof(ShowUpgradePremiumTotpText),
+            nameof(ShowAutoTyperButton)
         };
         public List<ICustomFieldItemViewModel> Fields
         {
@@ -672,6 +673,13 @@ namespace Bit.App.Pages
             }
         }
 
+        public bool ShowAutoTyperButton => AutoTyperEnabled().Result && Cipher.ViewPassword;
+
+        private async Task<bool> AutoTyperEnabled()
+        {
+            var autoTyperService = await _stateService.GetAutoTyperServiceAsync();
+            return autoTyperService != null;
+        }
         private async Task AutoTypeAsync(string id, string text = null)
         {
             if (_passwordRepromptService.ProtectedFields.Contains(id) && !await PromptPasswordAsync())

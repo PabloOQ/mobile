@@ -158,7 +158,7 @@
                                     Grid.RowSpan="2"
                                     AutomationProperties.IsInAccessibleTree="True"
                                     AutomationProperties.Name="{u:I18n CopyPassword}"
-                                    IsVisible="{Binding Cipher.ViewPassword}" />
+                                    IsVisible="{Binding ShowAutoTyperButton}" />
                                 <controls:IconButton
                                     StyleClass="box-row-button, box-row-button-platform"
                                     Text="{Binding Source={x:Static core:BitwardenIcons.CheckCircle}}"
