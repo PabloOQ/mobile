@@ -1321,7 +1321,12 @@ namespace Bit.Core.Services
             var reconciledOptions = ReconcileOptions(new StorageOptions { UserId = userId },
                 await GetDefaultStorageOptionsAsync());
             var key = Constants.AutoTyperServiceKey(reconciledOptions.UserId);
-            return await GetValueAsync<int?>(key, reconciledOptions);
+            int? service = await GetValueAsync<int?>(key, reconciledOptions);
+            if (service != null && !Enum.IsDefined(typeof(AutoTyperServiceType), (byte)service))
+            {
+                service = null;
+            }
+            return service;
         }
 
         public async Task SetAutoTyperService(int? value, string userId = null)
