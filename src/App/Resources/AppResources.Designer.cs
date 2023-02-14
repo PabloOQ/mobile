@@ -923,6 +923,303 @@ namespace Bit.App.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AutoTyper.
+        /// </summary>
+        public static string AutoTyper {
+            get {
+                return ResourceManager.GetString("AutoTyper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Service to type passwords wirelessly, additional hardware might be required.
+        /// </summary>
+        public static string AutoTyperDescription {
+            get {
+                return ResourceManager.GetString("AutoTyperDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to InputStick.
+        /// </summary>
+        public static string AutoTyperInputStick {
+            get {
+                return ResourceManager.GetString("AutoTyperInputStick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Czech (Czech Republic).
+        /// </summary>
+        public static string AutoTyperLayoutCSCZ {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutCSCZ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Danish (Denmark).
+        /// </summary>
+        public static string AutoTyperLayoutDADK {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutDADK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to German (Switzerland).
+        /// </summary>
+        public static string AutoTyperLayoutDECH {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutDECH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to German (Germany).
+        /// </summary>
+        public static string AutoTyperLayoutDEDE {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutDEDE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to German (Germany) Mac compatible.
+        /// </summary>
+        public static string AutoTyperLayoutDEDEMAC {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutDEDEMAC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Greek (Greece).
+        /// </summary>
+        public static string AutoTyperLayoutELGR {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutELGR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English (United Kingdom).
+        /// </summary>
+        public static string AutoTyperLayoutENGB {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutENGB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English (United States).
+        /// </summary>
+        public static string AutoTyperLayoutENUS {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutENUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English (United States) Dvorak.
+        /// </summary>
+        public static string AutoTyperLayoutENUSDV {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutENUSDV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English (United States International).
+        /// </summary>
+        public static string AutoTyperLayoutENUSINT {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutENUSINT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spanish (Spain).
+        /// </summary>
+        public static string AutoTyperLayoutESES {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutESES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finnish (Finland).
+        /// </summary>
+        public static string AutoTyperLayoutFIFI {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutFIFI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to French (Belgian).
+        /// </summary>
+        public static string AutoTyperLayoutFRBE {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutFRBE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to French (Canada).
+        /// </summary>
+        public static string AutoTyperLayoutFRCA {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutFRCA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to French (Switzerland).
+        /// </summary>
+        public static string AutoTyperLayoutFRCH {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutFRCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to French (France).
+        /// </summary>
+        public static string AutoTyperLayoutFRFR {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutFRFR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hebrew (Israel).
+        /// </summary>
+        public static string AutoTyperLayoutHEIL {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutHEIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Croatian (Croatia).
+        /// </summary>
+        public static string AutoTyperLayoutHRHR {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutHRHR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hungarian (Hungary).
+        /// </summary>
+        public static string AutoTyperLayoutHUHU {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutHUHU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Italian (Italy).
+        /// </summary>
+        public static string AutoTyperLayoutITIT {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutITIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Norwegian, Bokmal (Norway).
+        /// </summary>
+        public static string AutoTyperLayoutNBNO {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutNBNO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dutch (Netherlands).
+        /// </summary>
+        public static string AutoTyperLayoutNLNL {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutNLNL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Polish (Poland).
+        /// </summary>
+        public static string AutoTyperLayoutPLPL {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutPLPL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Portuguese (Brazil).
+        /// </summary>
+        public static string AutoTyperLayoutPTBR {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutPTBR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Portuguese (Portugal).
+        /// </summary>
+        public static string AutoTyperLayoutPTPT {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutPTPT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Russian (Russia).
+        /// </summary>
+        public static string AutoTyperLayoutRURU {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutRURU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slovak (Slovakia).
+        /// </summary>
+        public static string AutoTyperLayoutSKSK {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutSKSK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Swedish (Sweden).
+        /// </summary>
+        public static string AutoTyperLayoutSVSE {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutSVSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AutoTyper service.
+        /// </summary>
+        public static string AutoTyperService {
+            get {
+                return ResourceManager.GetString("AutoTyperService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AutoTyper services.
+        /// </summary>
+        public static string AutoTyperServices {
+            get {
+                return ResourceManager.GetString("AutoTyperServices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A verification code was sent to your email.
         /// </summary>
         public static string AVerificationCodeWasSentToYourEmail {
@@ -3650,45 +3947,7 @@ namespace Bit.App.Resources {
                 return ResourceManager.GetString("LoginSsoError", resourceCulture);
             }
         }
-
-        public static string AutoTyper {
-            get
-            {
-                return ResourceManager.GetString("AutoTyper", resourceCulture);
-            }
-        }
-
-        public static string AutoTyperDescription
-        {
-            get
-            {
-                return ResourceManager.GetString("AutoTyperDescription", resourceCulture);
-            }
-        }
         
-        public static string AutoTyperInputStick
-        {
-            get
-            {
-                return ResourceManager.GetString("AutoTyperInputStick", resourceCulture);
-            }
-        }
-
-        public static string AutoTyperService
-        {
-            get
-            {
-                return ResourceManager.GetString("AutoTyperService", resourceCulture);
-            }
-        }
-        
-        public static string AutoTyperServices
-        {
-            get {
-                return ResourceManager.GetString("AutoTyperServices", resourceCulture);
-            }
-        }
-
         /// <summary>
         ///   Looks up a localized string similar to Quickly log in using your organization&apos;s single sign-on portal. Please enter your organization&apos;s identifier to begin..
         /// </summary>
