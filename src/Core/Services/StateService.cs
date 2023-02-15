@@ -1322,6 +1322,7 @@ namespace Bit.Core.Services
                 await GetDefaultStorageOptionsAsync());
             var key = Constants.AutoTyperServiceKey(reconciledOptions.UserId);
             int? service = await GetValueAsync<int?>(key, reconciledOptions);
+            // Check if the service is still valid
             if (service != null && !Enum.IsDefined(typeof(AutoTyperServiceType), (byte)service))
             {
                 service = null;
@@ -1334,6 +1335,28 @@ namespace Bit.Core.Services
             var reconciledOptions = ReconcileOptions(new StorageOptions { UserId = userId },
                 await GetDefaultStorageOptionsAsync());
             var key = Constants.AutoTyperServiceKey(reconciledOptions.UserId);
+            await SetValueAsync(key, value, reconciledOptions);
+        }
+
+        public async Task<int?> GetAutoTyperLayoutAsync(string userId = null)
+        {
+            var reconciledOptions = ReconcileOptions(new StorageOptions { UserId = userId },
+                await GetDefaultStorageOptionsAsync());
+            var key = Constants.AutoTyperLayoutKey(reconciledOptions.UserId);
+            int? layout = await GetValueAsync<int?>(key, reconciledOptions);
+            // Check if the layout is still valid
+            if (layout != null && !Enum.IsDefined(typeof(LayoutType), (int)layout))
+            {
+                layout = null;
+            }
+            return layout;
+        }
+
+        public async Task SetAutoTyperLayout(int? value, string userId = null)
+        {
+            var reconciledOptions = ReconcileOptions(new StorageOptions { UserId = userId },
+                await GetDefaultStorageOptionsAsync());
+            var key = Constants.AutoTyperLayoutKey(reconciledOptions.UserId);
             await SetValueAsync(key, value, reconciledOptions);
         }
 

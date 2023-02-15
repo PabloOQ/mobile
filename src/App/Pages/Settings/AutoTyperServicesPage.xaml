@@ -27,6 +27,21 @@
                     StyleClass="box-footer-label"
                     Text="{u:I18n AutoTyperDescription}" />
             </StackLayout>
+            <StackLayout StyleClass="box">
+                <StackLayout StyleClass="box-row, box-row-input, box-row-input-options-platform">
+                    <Label
+                        Text="{u:I18n AutoTyperService}"
+                        StyleClass="box-label" />
+                    <Picker
+                        x:Name="_layoutPicker"
+                        ItemsSource="{Binding LayoutOptions, Mode=OneTime}"
+                        SelectedIndex="{Binding LayoutSelectedIndex}"
+                        StyleClass="box-value" />
+                </StackLayout>
+                <Label
+                    StyleClass="box-footer-label"
+                    Text="{u:I18n AutoTyperDescription}" />
+            </StackLayout>
         </StackLayout>
     </ScrollView>
 

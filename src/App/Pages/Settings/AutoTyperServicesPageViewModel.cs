@@ -12,20 +12,17 @@ namespace Bit.App.Pages
 {
     public class AutoTyperServicesPageViewModel : BaseViewModel
     {
-        private readonly IDeviceActionService _deviceActionService;
         private readonly IStateService _stateService;
-        private readonly MobileI18nService _i18nService;
 
-        private bool _autoTyperServiceToggled;
         private bool _inited;
         private int _autoTyperSelectedIndex;
+        private int _layoutSelectedIndex;
         public List<KeyValuePair<AutoTyperServiceType?, string>> AutoTyperServiceOptions { get; set; }
+        public List<KeyValuePair<LayoutType?, string>> LayoutOptions { get; set; }
 
         public AutoTyperServicesPageViewModel()
         {
-            _deviceActionService = ServiceContainer.Resolve<IDeviceActionService>("deviceActionService");
             _stateService = ServiceContainer.Resolve<IStateService>("stateService");
-            _i18nService = ServiceContainer.Resolve<II18nService>("i18nService") as MobileI18nService;
             PageTitle = AppResources.AutoTyperServices;
 
             AutoTyperServiceOptions = new List<KeyValuePair<AutoTyperServiceType?, string>>
@@ -33,6 +30,8 @@ namespace Bit.App.Pages
                 new KeyValuePair<AutoTyperServiceType?, string>(AutoTyperServiceType.None, AppResources.Off),
                 new KeyValuePair<AutoTyperServiceType?, string>(AutoTyperServiceType.InputStick, AppResources.AutoTyperInputStick),
             };
+
+            UpdateLayouts();
         }
 
         public int AutoTyperSelectedIndex
@@ -45,6 +44,31 @@ namespace Bit.App.Pages
                 {
                     SaveAutoTyperAsync().FireAndForget();
                 }
+                UpdateLayouts();
+            }
+        }
+
+        public int LayoutSelectedIndex
+        {
+            get => _layoutSelectedIndex;
+            set
+            {
+                if (SetProperty(ref _layoutSelectedIndex, value)
+                    )
+                {
+                    SaveLayoutAsync().FireAndForget();
+                }
+            }
+        }
+
+        private void UpdateLayouts()
+        {
+            // add all layout types
+            LayoutOptions = new List<KeyValuePair<LayoutType?, string>>();
+            var compatibleLayouts = System.Enum.GetValues(typeof(LayoutType));
+            foreach (LayoutType layout in compatibleLayouts)
+            {
+                LayoutOptions.Add(new KeyValuePair<LayoutType?, string>(layout, AutoTyperManager.GetLayoutString(layout)));
             }
         }
 
@@ -53,6 +77,9 @@ namespace Bit.App.Pages
             var autoTyperService = await _stateService.GetAutoTyperServiceAsync();
             AutoTyperSelectedIndex = autoTyperService == null ? 0 :
                 AutoTyperServiceOptions.FindIndex(k => (int?)k.Key == autoTyperService);
+            var layout = await _stateService.GetAutoTyperLayoutAsync();
+            LayoutSelectedIndex = layout == null ? 0 :
+                LayoutOptions.FindIndex(k => (int?)k.Key == layout);
             _inited = true;
         }
 
@@ -61,6 +88,14 @@ namespace Bit.App.Pages
             if (_inited && AutoTyperSelectedIndex > -1)
             {
                 await _stateService.SetAutoTyperService((int?)AutoTyperServiceOptions[AutoTyperSelectedIndex].Key);
+            }
+        }
+
+        private async Task SaveLayoutAsync()
+        {
+            if (_inited && LayoutSelectedIndex > -1)
+            {
+                await _stateService.SetAutoTyperLayout((int?)LayoutOptions[LayoutSelectedIndex].Key);
             }
         }
     }

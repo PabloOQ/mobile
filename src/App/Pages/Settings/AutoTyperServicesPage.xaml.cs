@@ -13,6 +13,7 @@ namespace Bit.App.Pages
             _vm = BindingContext as AutoTyperServicesPageViewModel;
             _vm.Page = this;
             _autoTyperPicker.ItemDisplayBinding = new Binding("Value");
+            _layoutPicker.ItemDisplayBinding = new Binding("Value");
         }
 
         protected async override void OnAppearing()

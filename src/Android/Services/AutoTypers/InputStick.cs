@@ -22,10 +22,10 @@ namespace Bit.Droid.Services.AutoTypers
         public void Type(String text)
         {
             var context = Application.Context;
-            InputStickBroadcast.Type(context,text,"es-ES",speed);
+            InputStickBroadcast.Type(context,text,GetLayoutKey(layout),speed);
         }
 
-        private String LayoutString(LayoutType layout)
+        private String GetLayoutKey(LayoutType layout)
         {
             switch (layout)
             {
@@ -88,6 +88,42 @@ namespace Bit.Droid.Services.AutoTypers
                 default:
                     return null;
             }
+        }
+
+        public List<LayoutType> GetCompatibleLayouts()
+        {
+            var layouts = new List<LayoutType>();
+
+            layouts.Add(LayoutType.cs_CZ);
+            layouts.Add(LayoutType.da_DK);
+            layouts.Add(LayoutType.de_CH);
+            layouts.Add(LayoutType.de_DE);
+            layouts.Add(LayoutType.de_DE_MAC);
+            layouts.Add(LayoutType.el_GR);
+            layouts.Add(LayoutType.en_GB);
+            layouts.Add(LayoutType.en_US);
+            layouts.Add(LayoutType.en_US);
+            layouts.Add(LayoutType.en_US_INT);
+            layouts.Add(LayoutType.es_ES);
+            layouts.Add(LayoutType.fi_FI);
+            layouts.Add(LayoutType.fr_BE);
+            layouts.Add(LayoutType.fr_CA);
+            layouts.Add(LayoutType.fr_CH);
+            layouts.Add(LayoutType.fr_FR);
+            layouts.Add(LayoutType.he_IL);
+            layouts.Add(LayoutType.hr_HR);
+            layouts.Add(LayoutType.hu_HU);
+            layouts.Add(LayoutType.it_IT);
+            layouts.Add(LayoutType.nb_NO);
+            layouts.Add(LayoutType.nl_NL);
+            layouts.Add(LayoutType.pl_PL);
+            layouts.Add(LayoutType.pt_BR);
+            layouts.Add(LayoutType.pt_PT);
+            layouts.Add(LayoutType.ru_RU);
+            layouts.Add(LayoutType.sk_SK);
+            layouts.Add(LayoutType.sv_SE);
+
+            return layouts;
         }
     }
 }
