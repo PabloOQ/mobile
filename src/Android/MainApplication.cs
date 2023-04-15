@@ -158,7 +158,7 @@ namespace Bit.Droid
             var cryptoFunctionService = new PclCryptoFunctionService(cryptoPrimitiveService);
             var cryptoService = new CryptoService(stateService, cryptoFunctionService);
             var passwordRepromptService = new MobilePasswordRepromptService(platformUtilsService, cryptoService);
-            var autoTyperService = new AutoTyperService();
+            var autoTyperService = new AutoTyperService(stateService);
 
             ServiceContainer.Register<IBroadcasterService>("broadcasterService", broadcasterService);
             ServiceContainer.Register<IMessagingService>("messagingService", messagingService);

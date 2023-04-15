@@ -9,69 +9,37 @@ namespace Bit.App.Utilities
 {
     public static class AutoTyperManager
     {
-        public static string GetLayoutString(LayoutType layout)
+        public static string LayoutText(LayoutType layout) => layout switch
         {
-            switch (layout)
-            {
-                case LayoutType.cs_CZ:
-                    return AppResources.AutoTyperLayoutCSCZ;
-                case LayoutType.da_DK:
-                    return AppResources.AutoTyperLayoutDADK;
-                case LayoutType.de_CH:
-                    return AppResources.AutoTyperLayoutDECH;
-                case LayoutType.de_DE:
-                    return AppResources.AutoTyperLayoutDEDE;
-                case LayoutType.de_DE_MAC:
-                    return AppResources.AutoTyperLayoutDEDEMAC;
-                case LayoutType.el_GR:
-                    return AppResources.AutoTyperLayoutELGR;
-                case LayoutType.en_GB:
-                    return AppResources.AutoTyperLayoutENGB;
-                case LayoutType.en_US:
-                    return AppResources.AutoTyperLayoutENUS;
-                case LayoutType.en_US_DV:
-                    return AppResources.AutoTyperLayoutENUSDV;
-                case LayoutType.en_US_INT:
-                    return AppResources.AutoTyperLayoutENUSINT;
-                case LayoutType.es_ES:
-                    return AppResources.AutoTyperLayoutESES;
-                case LayoutType.fi_FI:
-                    return AppResources.AutoTyperLayoutFIFI;
-                case LayoutType.fr_BE:
-                    return AppResources.AutoTyperLayoutFRBE;
-                case LayoutType.fr_CA:
-                    return AppResources.AutoTyperLayoutFRCA;
-                case LayoutType.fr_CH:
-                    return AppResources.AutoTyperLayoutFRCH;
-                case LayoutType.fr_FR:
-                    return AppResources.AutoTyperLayoutFRFR;
-                case LayoutType.he_IL:
-                    return AppResources.AutoTyperLayoutHEIL;
-                case LayoutType.hr_HR:
-                    return AppResources.AutoTyperLayoutHRHR;
-                case LayoutType.hu_HU:
-                    return AppResources.AutoTyperLayoutHUHU;
-                case LayoutType.it_IT:
-                    return AppResources.AutoTyperLayoutITIT;
-                case LayoutType.nb_NO:
-                    return AppResources.AutoTyperLayoutNBNO;
-                case LayoutType.nl_NL:
-                    return AppResources.AutoTyperLayoutNLNL;
-                case LayoutType.pl_PL:
-                    return AppResources.AutoTyperLayoutPLPL;
-                case LayoutType.pt_BR:
-                    return AppResources.AutoTyperLayoutPTBR;
-                case LayoutType.pt_PT:
-                    return AppResources.AutoTyperLayoutPTPT;
-                case LayoutType.ru_RU:
-                    return AppResources.AutoTyperLayoutRURU;
-                case LayoutType.sk_SK:
-                    return AppResources.AutoTyperLayoutSKSK;
-                case LayoutType.sv_SE:
-                    return AppResources.AutoTyperLayoutSVSE;
-                default:
-                    return null;
-            }
-        }
+            LayoutType.cs_CZ        => AppResources.AutoTyperLayoutCSCZ,
+            LayoutType.da_DK        => AppResources.AutoTyperLayoutDADK,
+            LayoutType.de_CH        => AppResources.AutoTyperLayoutDECH,
+            LayoutType.de_DE        => AppResources.AutoTyperLayoutDEDE,
+            LayoutType.de_DE_MAC    => AppResources.AutoTyperLayoutDEDEMAC,
+            LayoutType.el_GR        => AppResources.AutoTyperLayoutELGR,
+            LayoutType.en_GB        => AppResources.AutoTyperLayoutENGB,
+            LayoutType.en_US        => AppResources.AutoTyperLayoutENUS,
+            LayoutType.en_US_DV     => AppResources.AutoTyperLayoutENUSDV,
+            LayoutType.en_US_INT    => AppResources.AutoTyperLayoutENUSINT,
+            LayoutType.es_ES        => AppResources.AutoTyperLayoutESES,
+            LayoutType.fi_FI        => AppResources.AutoTyperLayoutFIFI,
+            LayoutType.fr_CA        => AppResources.AutoTyperLayoutFRCA,
+            LayoutType.fr_CH        => AppResources.AutoTyperLayoutFRCH,
+            LayoutType.fr_BE        => AppResources.AutoTyperLayoutFRBE,
+            LayoutType.fr_FR        => AppResources.AutoTyperLayoutFRFR,
+            LayoutType.he_IL        => AppResources.AutoTyperLayoutHEIL,
+            LayoutType.hr_HR        => AppResources.AutoTyperLayoutHRHR,
+            LayoutType.hu_HU        => AppResources.AutoTyperLayoutHUHU,
+            LayoutType.it_IT        => AppResources.AutoTyperLayoutITIT,
+            LayoutType.nb_NO        => AppResources.AutoTyperLayoutNBNO,
+            LayoutType.nl_NL        => AppResources.AutoTyperLayoutNLNL,
+            LayoutType.pl_PL        => AppResources.AutoTyperLayoutPLPL,
+            LayoutType.pt_BR        => AppResources.AutoTyperLayoutPTBR,
+            LayoutType.pt_PT        => AppResources.AutoTyperLayoutPTPT,
+            LayoutType.ru_RU        => AppResources.AutoTyperLayoutRURU,
+            LayoutType.sk_SK        => AppResources.AutoTyperLayoutSKSK,
+            LayoutType.sv_SE        => AppResources.AutoTyperLayoutSVSE,
+            _ => null,
+        };
     }
 }

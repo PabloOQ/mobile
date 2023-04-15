@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Bit.Core.Enums;
 
 namespace Bit.Core.Abstractions
 {
     public interface IAutoTyperService
     {
-        IAutoTyper typer { get; set; }
-        void Type(String text);
-        LayoutType GetLayout();
-        void SetLayout(LayoutType layout);
-        int GetSpeed();
-        void SetSpeed(int speed);
+        Task Type(String text, LayoutType layout, int speed);
+        Task<List<LayoutType>> CompatibleLayouts();
+        Task<AutoTyperProviderType> GetProviderTypeAsync();
+        Task SetProviderAsync(AutoTyperProviderType type);
+        Task<LayoutType> GetLayoutAsync();
+        Task SetLayoutAsync(LayoutType type);
+        Task<int> GetSpeedAsync();
+        Task SetSpeedAsync(int speed);
     }
 }

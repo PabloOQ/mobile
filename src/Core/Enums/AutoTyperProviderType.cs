@@ -1,6 +1,6 @@
 ﻿namespace Bit.Core.Enums
 {
-    public enum AutoTyperServiceType : byte
+    public enum AutoTyperProviderType : byte
     {
         None = 0,
         InputStick = 1,

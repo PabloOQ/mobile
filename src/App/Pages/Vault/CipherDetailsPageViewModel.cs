@@ -673,13 +673,9 @@ namespace Bit.App.Pages
             }
         }
 
-        public bool ShowAutoTyperButton => AutoTyperEnabled().Result && Cipher.ViewPassword;
+        public bool ShowAutoTyperButton => (await _autoTyperService.GetProviderTypeAsync()) != AutoTyperProviderType.None && Cipher.ViewPassword;
 
-        private async Task<bool> AutoTyperEnabled()
-        {
-            var autoTyperService = await _stateService.GetAutoTyperServiceAsync();
-            return autoTyperService != null;
-        }
+
         private async Task AutoTypeAsync(string id, string text = null)
         {
             if (_passwordRepromptService.ProtectedFields.Contains(id) && !await PromptPasswordAsync())
@@ -722,7 +718,7 @@ namespace Bit.App.Pages
                 name = AppResources.SecurityCode;
             }
 
-            _autoTyperService.Type(text);
+            _autoTyperService.Type(text, await _autoTyperService.GetLayoutAsync(), await _autoTyperService.GetSpeedAsync());
         }
 
         private void LaunchUri(LoginUriView uri)

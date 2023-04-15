@@ -163,9 +163,9 @@ namespace Bit.Core.Abstractions
         Task<bool> GetLastUserShouldConnectToWatchAsync();
         Task SetAvatarColorAsync(string value, string userId = null);
         Task<string> GetAvatarColorAsync(string userId = null);
-        Task<int?> GetAutoTyperServiceAsync(string userId = null);
-        Task SetAutoTyperService(int? value, string userId = null);
+        Task<int?> GetAutoTyperProviderAsync(string userId = null);
+        Task SetAutoTyperProvider(int? value, string userId = null);
         Task<int?> GetAutoTyperLayoutAsync(string userId = null);
-        Task SetAutoTyperLayout(int? value, string userId = null);
+        Task SetAutoTyperLayoutAsync(int? value, string userId = null);
     }
 }
