@@ -8,6 +8,7 @@ namespace Bit.Core.Abstractions
 {
     public interface IAutoTyperService
     {
+        Task Type(String text);
         Task Type(String text, LayoutType layout, int speed);
         Task<List<LayoutType>> CompatibleLayouts();
         Task<AutoTyperProviderType> GetProviderTypeAsync();

@@ -718,7 +718,7 @@ namespace Bit.App.Pages
                 name = AppResources.SecurityCode;
             }
 
-            _autoTyperService.Type(text, await _autoTyperService.GetLayoutAsync(), await _autoTyperService.GetSpeedAsync());
+            _autoTyperService.Type(text);
         }
 
         private void LaunchUri(LoginUriView uri)

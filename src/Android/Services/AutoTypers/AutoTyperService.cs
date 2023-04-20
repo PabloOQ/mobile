@@ -31,6 +31,11 @@ namespace Bit.Droid.Services.AutoTypers
         }
 
         // Type
+        public async Task Type(string text)
+        {
+            Type(text, await GetLayoutAsync(), await GetSpeedAsync());
+        }
+
         public async Task Type(string text, LayoutType layout, int speed)
         {
             // Check layout
@@ -57,6 +62,11 @@ namespace Bit.Droid.Services.AutoTypers
             AutoTyperProviderType.InputStick => new InputStick(),
             _ => null,
         };
+
+        public async Task<bool> IsEnabledAsync()
+        {
+            return await GetProviderTypeAsync() != AutoTyperProviderType.None;
+        }
 
         // Getters and setters
         public async Task<AutoTyperProviderType> GetProviderTypeAsync()
