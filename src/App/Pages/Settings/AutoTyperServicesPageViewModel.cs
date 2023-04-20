@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Bit.App.Abstractions;
 using Bit.App.Resources;
@@ -17,18 +18,18 @@ namespace Bit.App.Pages
         private bool _inited;
         private int _autoTyperSelectedIndex;
         private int _layoutSelectedIndex;
-        public List<KeyValuePair<AutoTyperProviderType?, string>> AutoTyperServiceOptions { get; set; }
-        public List<KeyValuePair<LayoutType?, string>> LayoutOptions { get; set; }
+        public List<AutoTyperProviderType> AutoTyperServiceOptions { get; set; }
+        public List<LayoutType> LayoutOptions { get; set; }
 
         public AutoTyperServicesPageViewModel()
         {
             _stateService = ServiceContainer.Resolve<IStateService>("stateService");
             PageTitle = AppResources.AutoTyperServices;
 
-            AutoTyperServiceOptions = new List<KeyValuePair<AutoTyperProviderType?, string>>
+            AutoTyperServiceOptions = new List<AutoTyperProviderType>
             {
-                new KeyValuePair<AutoTyperProviderType?, string>(AutoTyperProviderType.None, AppResources.Off),
-                new KeyValuePair<AutoTyperProviderType?, string>(AutoTyperProviderType.InputStick, AppResources.AutoTyperInputStick),
+                AutoTyperProviderType.None,
+                AutoTyperProviderType.InputStick
             };
 
             UpdateLayouts();
@@ -62,23 +63,19 @@ namespace Bit.App.Pages
         private void UpdateLayouts()
         {
             // add all layout types
-            LayoutOptions = new List<KeyValuePair<LayoutType?, string>>();
             var compatibleLayouts = System.Enum.GetValues(typeof(LayoutType));
-            foreach (LayoutType layout in compatibleLayouts)
-            {
-                LayoutOptions.Add(new KeyValuePair<LayoutType?, string>(layout, AutoTyperManager.LayoutText(layout)));
-            }
+            LayoutOptions = new List<LayoutType>(compatibleLayouts.Cast<LayoutType>().ToList());
         }
 
         public async Task InitAsync()
         {
             var autoTyperService = await _stateService.GetAutoTyperProviderAsync();
             AutoTyperSelectedIndex = autoTyperService == null ? 0 :
-                AutoTyperServiceOptions.FindIndex(k => (int?)k.Key == autoTyperService);
+                AutoTyperServiceOptions.FindIndex(k => (int?)k == autoTyperService);
 
             var layout = await _stateService.GetAutoTyperLayoutAsync();
             LayoutSelectedIndex = layout == null ? 0 :
-                LayoutOptions.FindIndex(k => (int?)k.Key == layout);
+                LayoutOptions.FindIndex(k => (int?)k == layout);
 
             _inited = true;
         }
@@ -87,7 +84,7 @@ namespace Bit.App.Pages
         {
             if (_inited && AutoTyperSelectedIndex > -1)
             {
-                await _stateService.SetAutoTyperProvider((int?)AutoTyperServiceOptions[AutoTyperSelectedIndex].Key);
+                await _stateService.SetAutoTyperProvider((int?)AutoTyperServiceOptions[AutoTyperSelectedIndex]);
             }
         }
 
@@ -95,7 +92,7 @@ namespace Bit.App.Pages
         {
             if (_inited && LayoutSelectedIndex > -1)
             {
-                await _stateService.SetAutoTyperLayoutAsync((int?)LayoutOptions[LayoutSelectedIndex].Key);
+                await _stateService.SetAutoTyperLayoutAsync((int?)LayoutOptions[LayoutSelectedIndex]);
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace Bit.App.Pages
 {
@@ -7,13 +8,11 @@ namespace Bit.App.Pages
     {
         private readonly AutoTyperServicesPageViewModel _vm;
 
-        public AutoTyperServicesPage(SettingsPage settingsPage)
+        public AutoTyperServicesPage()
         {
             InitializeComponent();
             _vm = BindingContext as AutoTyperServicesPageViewModel;
             _vm.Page = this;
-            _autoTyperPicker.ItemDisplayBinding = new Binding("Value");
-            _layoutPicker.ItemDisplayBinding = new Binding("Value");
         }
 
         protected async override void OnAppearing()

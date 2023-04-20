@@ -520,7 +520,7 @@ namespace Bit.App.Pages
                 {
                     Name = AppResources.AutoTyperServices,
                     SubLabel = "TODO",
-                    ExecuteAsync = () => Page.Navigation.PushModalAsync(new NavigationPage(new AutoTyperServicesPage(Page as SettingsPage)))
+                    ExecuteAsync = () => Page.Navigation.PushModalAsync(new NavigationPage(new AutoTyperServicesPage()))
                 });
             }
             var manageItems = new List<SettingsPageListItem>
