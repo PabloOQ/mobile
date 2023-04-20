@@ -1,65 +1,64 @@
-﻿using System;
-using Bit.Core.Attributes;
+﻿using Bit.Core.Attributes;
 
 namespace Bit.Core.Enums
 {
     public enum LayoutType
     {
-        [LocalizableEnum("Czech (Czech Republic)")]
+        [LocalizableEnum("AutoTyperLayoutCSCZ")]
         cs_CZ = 0,
-        [LocalizableEnum("Danish (Denmark)")]
+        [LocalizableEnum("AutoTyperLayoutDADK")]
         da_DK = 1,
-        [LocalizableEnum("German (Switzerland)")]
+        [LocalizableEnum("AutoTyperLayoutDECH")]
         de_CH = 2,
-        [LocalizableEnum("German (Germany)")]
+        [LocalizableEnum("AutoTyperLayoutDEDE")]
         de_DE = 3,
-        [LocalizableEnum("German (Germany), Mac compatible version")]
+        [LocalizableEnum("AutoTyperLayoutDEDEMAC")]
         de_DE_MAC = 4,
-        [LocalizableEnum("Greek (Greece)")]
+        [LocalizableEnum("AutoTyperLayoutELGR")]
         el_GR = 5,
-        [LocalizableEnum("English (United Kingdom)")]
+        [LocalizableEnum("AutoTyperLayoutENGB")]
         en_GB = 6,
-        [LocalizableEnum("English (United States)")]
+        [LocalizableEnum("AutoTyperLayoutENUS")]
         en_US = 7,
-        [LocalizableEnum("English (United States), Dvorak layout")]
+        [LocalizableEnum("AutoTyperLayoutENUSDV")]
         en_US_DV = 8,
-        [LocalizableEnum("English (United States), International")]
+        [LocalizableEnum("AutoTyperLayoutENUSINT")]
         en_US_INT = 9,
-        [LocalizableEnum("Spanish (Spain)")]
+        [LocalizableEnum("AutoTyperLayoutESES")]
         es_ES = 10,
-        [LocalizableEnum("Finnish (Finland)")]
+        [LocalizableEnum("AutoTyperLayoutFIFI")]
         fi_FI = 11,
-        [LocalizableEnum("French (Belgian)")]
+        [LocalizableEnum("AutoTyperLayoutFRBE")]
         fr_BE = 12,
-        [LocalizableEnum("French (Canada)")]
+        [LocalizableEnum("AutoTyperLayoutFRCA")]
         fr_CA = 13,
-        [LocalizableEnum("French (Switzerland)")]
+        [LocalizableEnum("AutoTyperLayoutFRCH")]
         fr_CH = 14,
-        [LocalizableEnum("French (France)")]
+        [LocalizableEnum("AutoTyperLayoutFRFR")]
         fr_FR = 15,
-        [LocalizableEnum("Hebrew (Israel)")]
+        [LocalizableEnum("AutoTyperLayoutHEIL")]
         he_IL = 16,
-        [LocalizableEnum("Croatian (Croatia)")]
+        [LocalizableEnum("AutoTyperLayoutHRHR")]
         hr_HR = 17,
-        [LocalizableEnum("Hungarian (Hungary)")]
+        [LocalizableEnum("AutoTyperLayoutHUHU")]
         hu_HU = 18,
-        [LocalizableEnum("Italian (Italy)")]
+        [LocalizableEnum("AutoTyperLayoutITIT")]
         it_IT = 19,
-        [LocalizableEnum("Norwegian, Bokmal (Norway)")]
+        [LocalizableEnum("AutoTyperLayoutNBNO")]
         nb_NO = 20,
-        [LocalizableEnum("Dutch (Netherlands)")]
+        [LocalizableEnum("AutoTyperLayoutNLNL")]
         nl_NL = 21,
-        [LocalizableEnum("Polish (Poland)")]
+        [LocalizableEnum("AutoTyperLayoutPLPL")]
         pl_PL = 22,
-        [LocalizableEnum("Portuguese (Brazil)")]
+        [LocalizableEnum("AutoTyperLayoutPTBR")]
         pt_BR = 23,
-        [LocalizableEnum("Portuguese (Portugal)")]
+        [LocalizableEnum("AutoTyperLayoutPTPT")]
         pt_PT = 24,
-        [LocalizableEnum("Russian (Russia)")]
+        [LocalizableEnum("AutoTyperLayoutRURU")]
         ru_RU = 25,
-        [LocalizableEnum("Slovak (Slovakia)")]
+        [LocalizableEnum("AutoTyperLayoutSKSK")]
         sk_SK = 26,
-        [LocalizableEnum("Swedish (Sweden)")]
+        [LocalizableEnum("AutoTyperLayoutSVSE")]
         sv_SE = 27,
     }
 }
