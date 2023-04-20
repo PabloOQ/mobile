@@ -51,6 +51,7 @@ namespace Bit.App.Pages
         private TotpHelper _totpTickHelper;
         private CancellationTokenSource _totpTickCancellationToken;
         private Task _totpTickTask;
+        private bool _autoTyperServiceEnabled;
 
         public CipherDetailsPageViewModel()
         {
@@ -107,7 +108,7 @@ namespace Bit.App.Pages
             nameof(IsDeleted),
             nameof(CanEdit),
             nameof(ShowUpgradePremiumTotpText),
-            nameof(ShowAutoTyperButton)
+            nameof(ShowAutoTyperPasswordButton)
         };
         public List<ICustomFieldItemViewModel> Fields
         {
@@ -251,6 +252,7 @@ namespace Bit.App.Pages
         public double TotpProgress => string.IsNullOrEmpty(TotpSec) ? 0 : double.Parse(TotpSec) * 100 / _totpInterval;
         public bool IsDeleted => Cipher.IsDeleted;
         public bool CanEdit => !Cipher.IsDeleted;
+        public bool ShowAutoTyperPasswordButton => _autoTyperServiceEnabled && Cipher.ViewPassword;
 
         public async Task<bool> LoadAsync(Action finishedLoadingAction = null)
         {
@@ -281,6 +283,9 @@ namespace Bit.App.Pages
                 var task = _eventService.CollectAsync(Core.Enums.EventType.Cipher_ClientViewed, CipherId);
             }
             _previousCipherId = CipherId;
+            var autoTyperProvider = await _stateService.GetAutoTyperProviderAsync();
+            _autoTyperServiceEnabled = autoTyperProvider != null &&
+                (AutoTyperProviderType)Enum.ToObject(typeof(AutoTyperProviderType), autoTyperProvider) != AutoTyperProviderType.None;
             finishedLoadingAction?.Invoke();
             return true;
         }
@@ -672,9 +677,6 @@ namespace Bit.App.Pages
                 }
             }
         }
-
-        public bool ShowAutoTyperButton => (await _autoTyperService.GetProviderTypeAsync()) != AutoTyperProviderType.None && Cipher.ViewPassword;
-
 
         private async Task AutoTypeAsync(string id, string text = null)
         {
