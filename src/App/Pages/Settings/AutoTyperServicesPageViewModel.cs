@@ -16,8 +16,8 @@ namespace Bit.App.Pages
         private readonly IStateService _stateService;
 
         private bool _inited;
-        private int _autoTyperSelectedIndex;
-        private int _layoutSelectedIndex;
+        private AutoTyperProviderType _autoTyperProviderTypeSelected;
+        private LayoutType _layoutTypeSelected;
         public List<AutoTyperProviderType> AutoTyperServiceOptions { get; set; }
         public List<LayoutType> LayoutOptions { get; set; }
 
@@ -26,6 +26,7 @@ namespace Bit.App.Pages
             _stateService = ServiceContainer.Resolve<IStateService>("stateService");
             PageTitle = AppResources.AutoTyperServices;
 
+            // Depends on the device
             AutoTyperServiceOptions = new List<AutoTyperProviderType>
             {
                 AutoTyperProviderType.None,
@@ -35,25 +36,25 @@ namespace Bit.App.Pages
             UpdateLayouts();
         }
 
-        public int AutoTyperSelectedIndex
+        public AutoTyperProviderType AutoTyperProviderTypeSelected
         {
-            get => _autoTyperSelectedIndex;
+            get => _autoTyperProviderTypeSelected;
             set
             {
-                if (SetProperty(ref _autoTyperSelectedIndex, value))
+                if (SetProperty(ref _autoTyperProviderTypeSelected, value))
                 {
-                    SaveAutoTyperAsync().FireAndForget();
+                    SaveAutoTyperProviderAsync().FireAndForget();
                 }
                 UpdateLayouts();
             }
         }
 
-        public int LayoutSelectedIndex
+        public LayoutType LayoutTypeSelected
         {
-            get => _layoutSelectedIndex;
+            get => _layoutTypeSelected;
             set
             {
-                if (SetProperty(ref _layoutSelectedIndex, value))
+                if (SetProperty(ref _layoutTypeSelected, value))
                 {
                     SaveLayoutAsync().FireAndForget();
                 }
@@ -62,37 +63,43 @@ namespace Bit.App.Pages
 
         private void UpdateLayouts()
         {
-            // add all layout types
-            var compatibleLayouts = System.Enum.GetValues(typeof(LayoutType));
-            LayoutOptions = new List<LayoutType>(compatibleLayouts.Cast<LayoutType>().ToList());
+            // get from the provider
+            var compatibleLayouts = System.Enum.GetValues(typeof(LayoutType)).Cast<LayoutType>().ToList();
+            LayoutOptions = new List<LayoutType>(compatibleLayouts);
         }
 
         public async Task InitAsync()
         {
-            var autoTyperService = await _stateService.GetAutoTyperProviderAsync();
-            AutoTyperSelectedIndex = autoTyperService == null ? 0 :
-                AutoTyperServiceOptions.FindIndex(k => (int?)k == autoTyperService);
+            var autoTyperProvider = await _stateService.GetAutoTyperProviderAsync();
+            AutoTyperProviderTypeSelected = autoTyperProvider == null ?
+                AutoTyperProviderType.None : (AutoTyperProviderType)autoTyperProvider;
+
+            // get from the provider
+            var compatibleLayouts = System.Enum.GetValues(typeof(LayoutType)).Cast<LayoutType>().ToList();
 
             var layout = await _stateService.GetAutoTyperLayoutAsync();
-            LayoutSelectedIndex = layout == null ? 0 :
-                LayoutOptions.FindIndex(k => (int?)k == layout);
+            LayoutTypeSelected = layout == null ?
+                LayoutOptions[0] :
+                compatibleLayouts.Contains((LayoutType)layout) ?
+                    (LayoutType)layout :
+                    LayoutOptions[0];
 
             _inited = true;
         }
 
-        private async Task SaveAutoTyperAsync()
+        private async Task SaveAutoTyperProviderAsync()
         {
-            if (_inited && AutoTyperSelectedIndex > -1)
+            if (_inited)
             {
-                await _stateService.SetAutoTyperProvider((int?)AutoTyperServiceOptions[AutoTyperSelectedIndex]);
+                await _stateService.SetAutoTyperProvider((int?)AutoTyperProviderTypeSelected);
             }
         }
 
         private async Task SaveLayoutAsync()
         {
-            if (_inited && LayoutSelectedIndex > -1)
+            if (_inited)
             {
-                await _stateService.SetAutoTyperLayoutAsync((int?)LayoutOptions[LayoutSelectedIndex]);
+                await _stateService.SetAutoTyperLayoutAsync((int?)LayoutTypeSelected);
             }
         }
     }

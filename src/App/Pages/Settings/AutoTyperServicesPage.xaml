@@ -28,7 +28,7 @@
                         <Picker
                             x:Name="_autoTyperPicker"
                             ItemsSource="{Binding AutoTyperServiceOptions, Mode=OneTime}"
-                            SelectedIndex="{Binding AutoTyperSelectedIndex}"
+                            SelectedItem="{Binding AutoTyperProviderTypeSelected}"
                             ItemDisplayBinding="{Binding ., Converter={StaticResource localizableEnum}}"
                             StyleClass="box-value" />
                     </StackLayout>
@@ -44,7 +44,7 @@
                         <Picker
                             x:Name="_layoutPicker"
                             ItemsSource="{Binding LayoutOptions}"
-                            SelectedIndex="{Binding LayoutSelectedIndex}"
+                            SelectedItem="{Binding LayoutTypeSelected}"
                             ItemDisplayBinding="{Binding ., Converter={StaticResource localizableEnum}}"
                             StyleClass="box-value" />
                     </StackLayout>
