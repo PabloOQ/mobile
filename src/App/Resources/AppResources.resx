@@ -2676,4 +2676,25 @@ Do you want to switch to this account?</value>
   <data name="AutoTyperLayoutSVSE" xml:space="preserve">
     <value>Swedish (Sweden)</value>
   </data>
+  <data name="Fast" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="Faster" xml:space="preserve">
+    <value>Faster</value>
+  </data>
+  <data name="Fastest" xml:space="preserve">
+    <value>Fastest</value>
+  </data>
+  <data name="Normal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="Slow" xml:space="preserve">
+    <value>Slow</value>
+  </data>
+  <data name="Slower" xml:space="preserve">
+    <value>Slower</value>
+  </data>
+  <data name="Slowest" xml:space="preserve">
+    <value>Slowest</value>
+  </data>
 </root>

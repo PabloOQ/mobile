@@ -52,6 +52,22 @@
                         StyleClass="box-footer-label"
                         Text="{u:I18n AutoTyperDescription}" />
                 </StackLayout>
+                <StackLayout StyleClass="box">
+                    <StackLayout StyleClass="box-row, box-row-input, box-row-input-options-platform">
+                        <Label
+                            Text="{u:I18n AutoTyperService}"
+                            StyleClass="box-label" />
+                        <Picker
+                            x:Name="_speedPicker"
+                            ItemsSource="{Binding SpeedOptions}"
+                            SelectedItem="{Binding SpeedTypeSelected}"
+                            ItemDisplayBinding="{Binding ., Converter={StaticResource localizableEnum}}"
+                            StyleClass="box-value" />
+                    </StackLayout>
+                    <Label
+                        StyleClass="box-footer-label"
+                        Text="{u:I18n AutoTyperDescription}" />
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentView>

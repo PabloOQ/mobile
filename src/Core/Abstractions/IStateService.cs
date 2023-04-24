@@ -167,5 +167,7 @@ namespace Bit.Core.Abstractions
         Task SetAutoTyperProvider(int? value, string userId = null);
         Task<int?> GetAutoTyperLayoutAsync(string userId = null);
         Task SetAutoTyperLayoutAsync(int? value, string userId = null);
+        Task<int?> GetAutoTyperSpeedAsync(string userId = null);
+        Task SetAutoTyperSpeedAsync(int? value, string userId = null);
     }
 }

@@ -2867,6 +2867,33 @@ namespace Bit.App.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fast.
+        /// </summary>
+        public static string Fast {
+            get {
+                return ResourceManager.GetString("Fast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Faster.
+        /// </summary>
+        public static string Faster {
+            get {
+                return ResourceManager.GetString("Faster", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fastest.
+        /// </summary>
+        public static string Fastest {
+            get {
+                return ResourceManager.GetString("Fastest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fastmail.
         /// </summary>
         public static string Fastmail {
@@ -4617,6 +4644,15 @@ namespace Bit.App.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Normal.
+        /// </summary>
+        public static string Normal {
+            get {
+                return ResourceManager.GetString("Normal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are no Sends in your account..
         /// </summary>
         public static string NoSends {
@@ -6019,6 +6055,33 @@ namespace Bit.App.Resources {
         public static string SimpleLogin {
             get {
                 return ResourceManager.GetString("SimpleLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slow.
+        /// </summary>
+        public static string Slow {
+            get {
+                return ResourceManager.GetString("Slow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slower.
+        /// </summary>
+        public static string Slower {
+            get {
+                return ResourceManager.GetString("Slower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slowest.
+        /// </summary>
+        public static string Slowest {
+            get {
+                return ResourceManager.GetString("Slowest", resourceCulture);
             }
         }
         

@@ -109,5 +109,6 @@
         public static string ShouldConnectToWatchKey(string userId) => $"shouldConnectToWatch_{userId}";
         public static string AutoTyperProviderKey(string userId) => $"autoTyperProvider_{userId}";
         public static string AutoTyperLayoutKey(string userId) => $"autoTyperLayout_{userId}";
+        public static string AutoTyperSpeedKey(string userId) => $"autoTyperSpeed_{userId}";
     }
 }

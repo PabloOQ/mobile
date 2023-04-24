@@ -1,21 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Bit.Core.Abstractions;
-using Com.Inputstick.Api.Broadcast;
 using Bit.Core.Enums;
-using Bit.Core.Services;
-using Bit.Core.Utilities;
 using System.Threading.Tasks;
-using Android.App.Admin;
 using Bit.App.Resources;
 
 namespace Bit.Droid.Services.AutoTypers
@@ -24,6 +13,15 @@ namespace Bit.Droid.Services.AutoTypers
     {
         private readonly IStateService _stateService;
         private IAutoTyperProvider typer;
+
+        public async Task Prepare()
+        {
+            if (typer == null)
+            {
+                await InitializeTyper();
+            }
+            typer.Prepare();
+        }
 
         public AutoTyperService(IStateService stateService)
         {
@@ -36,14 +34,13 @@ namespace Bit.Droid.Services.AutoTypers
             Type(text, await GetLayoutAsync(), await GetSpeedAsync());
         }
 
-        public async Task Type(string text, LayoutType layout, int speed)
+        public async Task Type(string text, LayoutType layout, SpeedType speed)
         {
             // Check layout
             if (!(await CompatibleLayouts()).Contains(layout))
             {
                 throw new ArgumentException("Layout not supported");
             }
-            // Speed formula?
             typer.Type(text, layout, speed);
         }
 
@@ -105,15 +102,24 @@ namespace Bit.Droid.Services.AutoTypers
             await _stateService.SetAutoTyperLayoutAsync((int) type);
         }
 
-        public async Task<int> GetSpeedAsync()
+        public async Task<SpeedType> GetSpeedAsync()
         {
-            // TODO
-            return 1;
+            SpeedType speed;
+            var storedSpeed = await _stateService.GetAutoTyperSpeedAsync();
+            if (storedSpeed == null)
+            {
+                speed = SpeedType.Normal;
+            }
+            else
+            {
+                speed = (SpeedType)storedSpeed;
+            }
+            return speed;
         }
 
         public async Task SetSpeedAsync(int speed)
         {
-            // TODO
+            await _stateService.SetAutoTyperSpeedAsync((int)speed);
         }
 
         public async Task<List<LayoutType>> CompatibleLayouts()

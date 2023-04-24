@@ -1322,7 +1322,7 @@ namespace Bit.Core.Services
                 await GetDefaultStorageOptionsAsync());
             var key = Constants.AutoTyperProviderKey(reconciledOptions.UserId);
             int? provider = await GetValueAsync<int?>(key, reconciledOptions);
-            // Check if the service is still valid
+            // Check if service is valid
             if (provider != null && !Enum.IsDefined(typeof(AutoTyperProviderType), (byte)provider))
             {
                 provider = null;
@@ -1344,8 +1344,7 @@ namespace Bit.Core.Services
                 await GetDefaultStorageOptionsAsync());
             var key = Constants.AutoTyperLayoutKey(reconciledOptions.UserId);
             int? layout = await GetValueAsync<int?>(key, reconciledOptions);
-            // Check if the layout is still valid
-            // return none?
+            // Check if layout is valid
             if (layout != null && !Enum.IsDefined(typeof(LayoutType), (int)layout))
             {
                 layout = null;
@@ -1358,6 +1357,28 @@ namespace Bit.Core.Services
             var reconciledOptions = ReconcileOptions(new StorageOptions { UserId = userId },
                 await GetDefaultStorageOptionsAsync());
             var key = Constants.AutoTyperLayoutKey(reconciledOptions.UserId);
+            await SetValueAsync(key, value, reconciledOptions);
+        }
+
+        public async Task<int?> GetAutoTyperSpeedAsync(string userId = null)
+        {
+            var reconciledOptions = ReconcileOptions(new StorageOptions { UserId = userId },
+                await GetDefaultStorageOptionsAsync());
+            var key = Constants.AutoTyperSpeedKey(reconciledOptions.UserId);
+            int? speed = await GetValueAsync<int?>(key, reconciledOptions);
+            // Check if speed is valid
+            if (speed != null && !Enum.IsDefined(typeof(SpeedType), (int)speed))
+            {
+                speed = null;
+            }
+            return speed;
+        }
+
+        public async Task SetAutoTyperSpeedAsync(int? value, string userId = null)
+        {
+            var reconciledOptions = ReconcileOptions(new StorageOptions { UserId = userId },
+                await GetDefaultStorageOptionsAsync());
+            var key = Constants.AutoTyperSpeedKey(reconciledOptions.UserId);
             await SetValueAsync(key, value, reconciledOptions);
         }
 

@@ -18,8 +18,10 @@ namespace Bit.App.Pages
         private bool _inited;
         private AutoTyperProviderType _autoTyperProviderTypeSelected;
         private LayoutType _layoutTypeSelected;
+        private SpeedType _speedTypeSelected;
         public List<AutoTyperProviderType> AutoTyperServiceOptions { get; set; }
         public List<LayoutType> LayoutOptions { get; set; }
+        public List<SpeedType> SpeedOptions { get; set; }
 
         public AutoTyperServicesPageViewModel()
         {
@@ -33,7 +35,7 @@ namespace Bit.App.Pages
                 AutoTyperProviderType.InputStick
             };
 
-            UpdateLayouts();
+            UpdateLayoutsAndSpeed();
         }
 
         public AutoTyperProviderType AutoTyperProviderTypeSelected
@@ -45,7 +47,7 @@ namespace Bit.App.Pages
                 {
                     SaveAutoTyperProviderAsync().FireAndForget();
                 }
-                UpdateLayouts();
+                UpdateLayoutsAndSpeed();
             }
         }
 
@@ -61,11 +63,34 @@ namespace Bit.App.Pages
             }
         }
 
-        private void UpdateLayouts()
+        public SpeedType SpeedTypeSelected
+        {
+            get=> _speedTypeSelected;
+            set
+            {
+                if (SetProperty(ref _speedTypeSelected, value))
+                {
+                    SaveSpeedAsync().FireAndForget();
+                }
+            }
+        }
+
+        private void UpdateLayoutsAndSpeed()
         {
             // get from the provider
             var compatibleLayouts = System.Enum.GetValues(typeof(LayoutType)).Cast<LayoutType>().ToList();
             LayoutOptions = new List<LayoutType>(compatibleLayouts);
+
+            SpeedOptions = new List<SpeedType>
+            {
+                SpeedType.Slowest,
+                SpeedType.Slower,
+                SpeedType.Slow,
+                SpeedType.Normal,
+                SpeedType.Fast,
+                SpeedType.Faster,
+                SpeedType.Fastest
+            };
         }
 
         public async Task InitAsync()
@@ -73,7 +98,6 @@ namespace Bit.App.Pages
             var autoTyperProvider = await _stateService.GetAutoTyperProviderAsync();
             AutoTyperProviderTypeSelected = autoTyperProvider == null ?
                 AutoTyperProviderType.None : (AutoTyperProviderType)autoTyperProvider;
-
             // get from the provider
             var compatibleLayouts = System.Enum.GetValues(typeof(LayoutType)).Cast<LayoutType>().ToList();
 
@@ -83,6 +107,11 @@ namespace Bit.App.Pages
                 compatibleLayouts.Contains((LayoutType)layout) ?
                     (LayoutType)layout :
                     LayoutOptions[0];
+
+            var speed = await _stateService.GetAutoTyperSpeedAsync();
+            SpeedTypeSelected = speed == null ?
+                SpeedType.Normal :
+                (SpeedType)speed;
 
             _inited = true;
         }
@@ -100,6 +129,14 @@ namespace Bit.App.Pages
             if (_inited)
             {
                 await _stateService.SetAutoTyperLayoutAsync((int?)LayoutTypeSelected);
+            }
+        }
+
+        private async Task SaveSpeedAsync()
+        {
+            if (_inited)
+            {
+                await _stateService.SetAutoTyperSpeedAsync((int?)SpeedTypeSelected);
             }
         }
     }

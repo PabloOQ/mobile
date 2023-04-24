@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Bit.Core.Abstractions;
 using Com.Inputstick.Api.Broadcast;
 using Bit.Core.Enums;
@@ -19,10 +13,15 @@ namespace Bit.Droid.Services.AutoTypers
     {
         private Dictionary<LayoutType, string> layouts;
 
-        public void Type(String text, LayoutType layout, int speed)
+        public void Prepare()
+        {
+            InputStickBroadcast.RequestConnection(Application.Context);
+        }
+
+        public void Type(String text, LayoutType layout, SpeedType speed)
         {
             InitializeLayouts();
-            InputStickBroadcast.Type(Application.Context, text, layouts[layout], speed);
+            InputStickBroadcast.Type(Application.Context, text, layouts[layout], SpeedToValue(speed));
         }
 
         public List<LayoutType> CompatibleLayouts()
@@ -65,6 +64,27 @@ namespace Bit.Droid.Services.AutoTypers
                 layouts.Add(LayoutType.ru_RU, "ru-RU");
                 layouts.Add(LayoutType.sk_SK, "sk-SK");
                 layouts.Add(LayoutType.sv_SE, "sv-SE");
+            }
+        }
+        public int SpeedToValue(SpeedType speed)
+        {
+            switch (speed)
+            {
+                case SpeedType.Slowest:
+                    return 15;
+                case SpeedType.Slower:
+                    return 8;
+                case SpeedType.Slow:
+                    return 3;
+
+                case SpeedType.Normal:
+                default:
+                    return 2;
+
+                case SpeedType.Fastest: // Not supported
+                case SpeedType.Faster:  // Not supported
+                case SpeedType.Fast:
+                    return 1;
             }
         }
 

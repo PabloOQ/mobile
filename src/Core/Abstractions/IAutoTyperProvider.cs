@@ -7,8 +7,10 @@ namespace Bit.Core.Abstractions
 {
     public interface IAutoTyperProvider
     {
-        void Type(String text, LayoutType layout, int speed);
+        void Prepare();
+        void Type(String text, LayoutType layout, SpeedType speed);
         List<LayoutType> CompatibleLayouts();
         AutoTyperProviderType GetProviderType();
+        int SpeedToValue(SpeedType speed);
     }
 }
