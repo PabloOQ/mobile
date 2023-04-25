@@ -108,7 +108,8 @@ namespace Bit.App.Pages
             nameof(IsDeleted),
             nameof(CanEdit),
             nameof(ShowUpgradePremiumTotpText),
-            nameof(ShowAutoTyperPasswordButton)
+            nameof(ShowAutoTyperPasswordButton),
+            nameof(ShowAutoTyperButton)
         };
         public List<ICustomFieldItemViewModel> Fields
         {
@@ -253,6 +254,8 @@ namespace Bit.App.Pages
         public bool IsDeleted => Cipher.IsDeleted;
         public bool CanEdit => !Cipher.IsDeleted;
         public bool ShowAutoTyperPasswordButton => _autoTyperServiceEnabled && Cipher.ViewPassword;
+        public bool ShowAutoTyperTotpButton => _autoTyperServiceEnabled && _canAccessPremium;
+        public bool ShowAutoTyperButton => _autoTyperServiceEnabled;
 
         public async Task<bool> LoadAsync(Action finishedLoadingAction = null)
         {

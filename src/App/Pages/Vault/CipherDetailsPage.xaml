@@ -93,6 +93,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Label
                                     Text="{u:I18n Username}"
@@ -106,11 +107,22 @@
                                     Grid.Column="0" />
                                 <controls:IconButton
                                     StyleClass="box-row-button, box-row-button-platform"
+                                    Text="{Binding Source={x:Static core:BitwardenIcons.Send}}"
+                                    Command="{Binding AutoTypeCommand}"
+                                    CommandParameter="LoginUsername"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Grid.RowSpan="2"
+                                    AutomationProperties.IsInAccessibleTree="True"
+                                    AutomationProperties.Name="{u:I18n CopyPassword}"
+                                    IsVisible="{Binding ShowAutoTyperButton}" />
+                                <controls:IconButton
+                                    StyleClass="box-row-button, box-row-button-platform"
                                     Text="{Binding Source={x:Static core:BitwardenIcons.Clone}}"
                                     Command="{Binding CopyCommand}"
                                     CommandParameter="LoginUsername"
                                     Grid.Row="0"
-                                    Grid.Column="1"
+                                    Grid.Column="2"
                                     Grid.RowSpan="2"
                                     AutomationProperties.IsInAccessibleTree="True"
                                     AutomationProperties.Name="{u:I18n CopyUsername}" />
@@ -204,6 +216,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="40" />
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Label
                                     Text="{u:I18n VerificationCodeTotp}"
@@ -238,12 +251,23 @@
                                     VerticalOptions="FillAndExpand" />
                                 <controls:IconButton
                                     StyleClass="box-row-button, box-row-button-platform"
+                                    Text="{Binding Source={x:Static core:BitwardenIcons.Send}}"
+                                    Command="{Binding AutoTypeCommand}"
+                                    CommandParameter="LoginTotp"
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    Grid.RowSpan="2"
+                                    AutomationProperties.IsInAccessibleTree="True"
+                                    AutomationProperties.Name="{u:I18n CopyPassword}"
+                                    IsVisible="{Binding ShowAutoTyperTotpButton}" />
+                                <controls:IconButton
+                                    StyleClass="box-row-button, box-row-button-platform"
                                     Text="{Binding Source={x:Static core:BitwardenIcons.Clone}}"
                                     Command="{Binding CopyCommand}"
                                     IsVisible="{Binding CanAccessPremium}"
                                     CommandParameter="LoginTotp"
                                     Grid.Row="0"
-                                    Grid.Column="2"
+                                    Grid.Column="3"
                                     Grid.RowSpan="2"
                                     AutomationProperties.IsInAccessibleTree="True"
                                     AutomationProperties.Name="{u:I18n CopyTotp}" />
@@ -280,6 +304,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Label
                                     Text="{u:I18n Number}"
@@ -300,10 +325,21 @@
                                     IsVisible="{Binding ShowCardNumber}" />
                                 <controls:IconButton
                                     StyleClass="box-row-button, box-row-button-platform"
+                                    Text="{Binding Source={x:Static core:BitwardenIcons.Send}}"
+                                    Command="{Binding AutoTypeCommand}"
+                                    CommandParameter="CardNumber"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Grid.RowSpan="2"
+                                    AutomationProperties.IsInAccessibleTree="True"
+                                    AutomationProperties.Name="{u:I18n CopyPassword}"
+                                    IsVisible="{Binding ShowAutoTyperButton}" />
+                                <controls:IconButton
+                                    StyleClass="box-row-button, box-row-button-platform"
                                     Text="{Binding ShowCardNumberIcon}"
                                     Command="{Binding ToggleCardNumberCommand}"
                                     Grid.Row="0"
-                                    Grid.Column="1"
+                                    Grid.Column="2"
                                     Grid.RowSpan="2"
                                     AutomationProperties.IsInAccessibleTree="True"
                                     AutomationProperties.Name="{u:I18n ToggleVisibility}" />
@@ -313,7 +349,7 @@
                                     Command="{Binding CopyCommand}"
                                     CommandParameter="CardNumber"
                                     Grid.Row="0"
-                                    Grid.Column="2"
+                                    Grid.Column="3"
                                     Grid.RowSpan="2"
                                     AutomationProperties.IsInAccessibleTree="True"
                                     AutomationProperties.Name="{u:I18n CopyNumber}" />
@@ -352,6 +388,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Label
                                     Text="{u:I18n SecurityCode}"
@@ -372,10 +409,21 @@
                                     IsVisible="{Binding ShowCardCode}" />
                                 <controls:IconButton
                                     StyleClass="box-row-button, box-row-button-platform"
+                                    Text="{Binding Source={x:Static core:BitwardenIcons.Send}}"
+                                    Command="{Binding AutoTypeCommand}"
+                                    CommandParameter="CardCode"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Grid.RowSpan="2"
+                                    AutomationProperties.IsInAccessibleTree="True"
+                                    AutomationProperties.Name="{u:I18n CopyPassword}"
+                                    IsVisible="{Binding ShowAutoTyperButton}" />
+                                <controls:IconButton
+                                    StyleClass="box-row-button, box-row-button-platform"
                                     Text="{Binding ShowCardCodeIcon}"
                                     Command="{Binding ToggleCardCodeCommand}"
                                     Grid.Row="0"
-                                    Grid.Column="1"
+                                    Grid.Column="2"
                                     Grid.RowSpan="2"
                                     AutomationProperties.IsInAccessibleTree="True"
                                     AutomationProperties.Name="{u:I18n ToggleVisibility}" />
@@ -385,7 +433,7 @@
                                     Command="{Binding CopyCommand}"
                                     CommandParameter="CardCode"
                                     Grid.Row="0"
-                                    Grid.Column="2"
+                                    Grid.Column="3"
                                     Grid.RowSpan="2"
                                     AutomationProperties.IsInAccessibleTree="True"
                                     AutomationProperties.Name="{u:I18n CopySecurityCode}" />
