@@ -29,6 +29,9 @@
         Cipher_SoftDeleted = 1115,
         Cipher_Restored = 1116,
         Cipher_ClientToggledCardNumberVisible = 1117,
+        Cipher_ClientTypedPassword = 1118,
+        Cipher_ClientTypedHiddenField = 1119,
+        Cipher_ClientTypedCardCode = 1120,
 
         Collection_Created = 1300,
         Collection_Updated = 1301,

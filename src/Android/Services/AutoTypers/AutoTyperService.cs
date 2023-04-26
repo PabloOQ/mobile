@@ -14,13 +14,21 @@ namespace Bit.Droid.Services.AutoTypers
         private readonly IStateService _stateService;
         private IAutoTyperProvider typer;
 
-        public async Task Prepare()
+        public async Task Connect()
         {
             if (typer == null)
             {
                 await InitializeTyper();
             }
-            typer.Prepare();
+            typer.Connect();
+        }
+
+        public async Task Disconnect()
+        {
+            if (typer != null)
+            {
+                typer.Disconnect();
+            }
         }
 
         public AutoTyperService(IStateService stateService)

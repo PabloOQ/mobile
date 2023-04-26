@@ -8,7 +8,8 @@ namespace Bit.Core.Abstractions
 {
     public interface IAutoTyperService
     {
-        Task Prepare();
+        Task Connect();
+        Task Disconnect();
         Task Type(String text);
         Task Type(String text, LayoutType layout, SpeedType speed);
         Task<List<LayoutType>> CompatibleLayouts();

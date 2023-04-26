@@ -723,7 +723,26 @@ namespace Bit.App.Pages
                 name = AppResources.SecurityCode;
             }
 
-            _autoTyperService.Type(text);
+            if (text != null)
+            {
+                await _autoTyperService.Type(text);
+                if (!string.IsNullOrWhiteSpace(name))
+                {
+                    _platformUtilsService.ShowToast("info", null, string.Format(AppResources.AutoTyperSentToTyper, name));
+                }
+                if (id == "LoginPassword")
+                {
+                    await _eventService.CollectAsync(Core.Enums.EventType.Cipher_ClientTypedPassword, CipherId);
+                }
+                else if (id == "CardCode")
+                {
+                    await _eventService.CollectAsync(Core.Enums.EventType.Cipher_ClientTypedCardCode, CipherId);
+                }
+                else if (id == "H_FieldValue")
+                {
+                    await _eventService.CollectAsync(Core.Enums.EventType.Cipher_ClientTypedHiddenField, CipherId);
+                }
+            }
         }
 
         private void LaunchUri(LoginUriView uri)

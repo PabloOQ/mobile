@@ -1202,6 +1202,15 @@ namespace Bit.App.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} sent to Auto-typer.
+        /// </summary>
+        public static string AutoTyperSentToTyper {
+            get {
+                return ResourceManager.GetString("AutoTyperSentToTyper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AutoTyper service.
         /// </summary>
         public static string AutoTyperService {

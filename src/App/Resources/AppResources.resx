@@ -2588,6 +2588,7 @@ Do you want to switch to this account?</value>
   </data>
   <data name="AutoTyperInputStick" xml:space="preserve">
     <value>InputStick</value>
+    <comment>"InputStick" is the product name and should not be translated.</comment>
   </data>
   <data name="AutoTyperService" xml:space="preserve">
     <value>AutoTyper service</value>
@@ -2696,5 +2697,9 @@ Do you want to switch to this account?</value>
   </data>
   <data name="Slowest" xml:space="preserve">
     <value>Slowest</value>
+  </data>
+  <data name="AutoTyperSentToTyper" xml:space="preserve">
+    <value>{0} sent to Auto-typer</value>
+    <comment>Info message, when sending a value to be written on an Auto-Typer</comment>
   </data>
 </root>
