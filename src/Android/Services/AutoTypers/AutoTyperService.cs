@@ -39,7 +39,7 @@ namespace Bit.Droid.Services.AutoTypers
         // Type
         public async Task Type(string text)
         {
-            Type(text, await GetLayoutAsync(), await GetSpeedAsync());
+            await Type(text, await GetLayoutAsync(), await GetSpeedAsync());
         }
 
         public async Task Type(string text, LayoutType layout, SpeedType speed)
