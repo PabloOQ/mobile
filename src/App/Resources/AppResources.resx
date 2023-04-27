@@ -2702,4 +2702,26 @@ Do you want to switch to this account?</value>
     <value>{0} sent to Auto-typer</value>
     <comment>Info message, when sending a value to be written on an Auto-Typer</comment>
   </data>
+  <data name="AutoTypeUsername" xml:space="preserve">
+    <value>Type username</value>
+    <comment>The button text that allows a user to type the login's username through AutoTyper.</comment>
+  </data>
+  <data name="AutoType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="AutoTypeCard" xml:space="preserve">
+    <value>Type card</value>
+  </data>
+  <data name="AutoTypeNumber" xml:space="preserve">
+    <value>Type number</value>
+  </data>
+  <data name="AutoTypePassword" xml:space="preserve">
+    <value>Type password</value>
+  </data>
+  <data name="AutoTypeSecurityCode" xml:space="preserve">
+    <value>Type security code</value>
+  </data>
+  <data name="AutoTypeTotp" xml:space="preserve">
+    <value>Type TOTP</value>
+  </data>
 </root>

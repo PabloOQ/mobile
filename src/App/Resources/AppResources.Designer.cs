@@ -923,6 +923,42 @@ namespace Bit.App.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        public static string AutoType {
+            get {
+                return ResourceManager.GetString("AutoType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type card.
+        /// </summary>
+        public static string AutoTypeCard {
+            get {
+                return ResourceManager.GetString("AutoTypeCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type number.
+        /// </summary>
+        public static string AutoTypeNumber {
+            get {
+                return ResourceManager.GetString("AutoTypeNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type password.
+        /// </summary>
+        public static string AutoTypePassword {
+            get {
+                return ResourceManager.GetString("AutoTypePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AutoTyper.
         /// </summary>
         public static string AutoTyper {
@@ -1225,6 +1261,33 @@ namespace Bit.App.Resources {
         public static string AutoTyperServices {
             get {
                 return ResourceManager.GetString("AutoTyperServices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type security code.
+        /// </summary>
+        public static string AutoTypeSecurityCode {
+            get {
+                return ResourceManager.GetString("AutoTypeSecurityCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type TOTP.
+        /// </summary>
+        public static string AutoTypeTotp {
+            get {
+                return ResourceManager.GetString("AutoTypeTotp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type username.
+        /// </summary>
+        public static string AutoTypeUsername {
+            get {
+                return ResourceManager.GetString("AutoTypeUsername", resourceCulture);
             }
         }
         
