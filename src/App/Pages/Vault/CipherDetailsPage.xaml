@@ -114,7 +114,7 @@
                                     Grid.Column="1"
                                     Grid.RowSpan="2"
                                     AutomationProperties.IsInAccessibleTree="True"
-                                    AutomationProperties.Name="{u:I18n CopyPassword}"
+                                    AutomationProperties.Name="{u:I18n AutoTypeUsername}"
                                     IsVisible="{Binding ShowAutoTyperButton}" />
                                 <controls:IconButton
                                     StyleClass="box-row-button, box-row-button-platform"
@@ -169,7 +169,7 @@
                                     Grid.Column="1"
                                     Grid.RowSpan="2"
                                     AutomationProperties.IsInAccessibleTree="True"
-                                    AutomationProperties.Name="{u:I18n CopyPassword}"
+                                    AutomationProperties.Name="{u:I18n AutoTypePassword}"
                                     IsVisible="{Binding ShowAutoTyperPasswordButton}" />
                                 <controls:IconButton
                                     StyleClass="box-row-button, box-row-button-platform"
@@ -258,7 +258,7 @@
                                     Grid.Column="2"
                                     Grid.RowSpan="2"
                                     AutomationProperties.IsInAccessibleTree="True"
-                                    AutomationProperties.Name="{u:I18n CopyPassword}"
+                                    AutomationProperties.Name="{u:I18n AutoTypeTotp}"
                                     IsVisible="{Binding ShowAutoTyperTotpButton}" />
                                 <controls:IconButton
                                     StyleClass="box-row-button, box-row-button-platform"
@@ -332,7 +332,7 @@
                                     Grid.Column="1"
                                     Grid.RowSpan="2"
                                     AutomationProperties.IsInAccessibleTree="True"
-                                    AutomationProperties.Name="{u:I18n CopyPassword}"
+                                    AutomationProperties.Name="{u:I18n AutoTypeCard}"
                                     IsVisible="{Binding ShowAutoTyperButton}" />
                                 <controls:IconButton
                                     StyleClass="box-row-button, box-row-button-platform"
@@ -416,7 +416,7 @@
                                     Grid.Column="1"
                                     Grid.RowSpan="2"
                                     AutomationProperties.IsInAccessibleTree="True"
-                                    AutomationProperties.Name="{u:I18n CopyPassword}"
+                                    AutomationProperties.Name="{u:I18n AutoTypeSecurityCode}"
                                     IsVisible="{Binding ShowAutoTyperButton}" />
                                 <controls:IconButton
                                     StyleClass="box-row-button, box-row-button-platform"
@@ -604,7 +604,7 @@
                                                 Grid.Column="1"
                                                 Grid.RowSpan="2"
                                                 AutomationProperties.IsInAccessibleTree="True"
-                                                AutomationProperties.Name="{u:I18n CopyPassword}"
+                                                AutomationProperties.Name="{u:I18n AutoType}"
                                                 IsVisible="{Binding BindingContext.ShowAutoTyperButton, Source={x:Reference _page}}"/>
                                             <controls:IconButton
                                                 StyleClass="box-row-button, box-row-button-platform"
