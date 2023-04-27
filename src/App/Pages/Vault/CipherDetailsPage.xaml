@@ -576,6 +576,7 @@
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="Auto" />
                                                 <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
                                             <Label
                                                 Text="{u:I18n URI}"
@@ -596,11 +597,22 @@
                                                 Grid.Column="0" />
                                             <controls:IconButton
                                                 StyleClass="box-row-button, box-row-button-platform"
+                                                Text="{Binding Source={x:Static core:BitwardenIcons.Send}}"
+                                                Command="{Binding BindingContext.AutoTypeUriCommand, Source={x:Reference _page}}"
+                                                CommandParameter="{Binding .}"
+                                                Grid.Row="0"
+                                                Grid.Column="1"
+                                                Grid.RowSpan="2"
+                                                AutomationProperties.IsInAccessibleTree="True"
+                                                AutomationProperties.Name="{u:I18n CopyPassword}"
+                                                IsVisible="{Binding BindingContext.ShowAutoTyperButton, Source={x:Reference _page}}"/>
+                                            <controls:IconButton
+                                                StyleClass="box-row-button, box-row-button-platform"
                                                 Text="{Binding Source={x:Static core:BitwardenIcons.ShareSquare}}"
                                                 Command="{Binding BindingContext.LaunchUriCommand, Source={x:Reference _page}}"
                                                 CommandParameter="{Binding .}"
                                                 Grid.Row="0"
-                                                Grid.Column="1"
+                                                Grid.Column="2"
                                                 Grid.RowSpan="2"
                                                 IsVisible="{Binding CanLaunch, Mode=OneWay}"
                                                 AutomationProperties.IsInAccessibleTree="True"
@@ -611,7 +623,7 @@
                                                 Command="{Binding BindingContext.CopyUriCommand, Source={x:Reference _page}}"
                                                 CommandParameter="{Binding .}"
                                                 Grid.Row="0"
-                                                Grid.Column="2"
+                                                Grid.Column="3"
                                                 Grid.RowSpan="2"
                                                 AutomationProperties.IsInAccessibleTree="True"
                                                 AutomationProperties.Name="{u:I18n Copy}" />

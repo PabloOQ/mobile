@@ -72,6 +72,7 @@ namespace Bit.App.Pages
             CopyUriCommand = new AsyncCommand<LoginUriView>(uriView => CopyAsync("LoginUri", uriView.Uri), onException: ex => _logger.Exception(ex), allowsMultipleExecutions: false);
             CopyFieldCommand = new AsyncCommand<FieldView>(field => CopyAsync(field.Type == FieldType.Hidden ? "H_FieldValue" : "FieldValue", field.Value), onException: ex => _logger.Exception(ex), allowsMultipleExecutions: false);
             AutoTypeCommand = new AsyncCommand<string>((id) => AutoTypeAsync(id, null), onException: ex => _logger.Exception(ex), allowsMultipleExecutions: false);
+            AutoTypeUriCommand = new AsyncCommand<LoginUriView>(uriView => AutoTypeAsync("LoginUri", uriView.Uri), onException: ex => _logger.Exception(ex), allowsMultipleExecutions: false);
             LaunchUriCommand = new Command<LoginUriView>(LaunchUri);
             TogglePasswordCommand = new Command(TogglePassword);
             ToggleCardNumberCommand = new Command(ToggleCardNumber);
@@ -85,6 +86,7 @@ namespace Bit.App.Pages
         public ICommand CopyUriCommand { get; set; }
         public ICommand CopyFieldCommand { get; set; }
         public ICommand AutoTypeCommand { get; set; }
+        public ICommand AutoTypeUriCommand { get; set; }
         public Command LaunchUriCommand { get; set; }
         public Command TogglePasswordCommand { get; set; }
         public Command ToggleCardNumberCommand { get; set; }
