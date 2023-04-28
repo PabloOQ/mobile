@@ -36,9 +36,11 @@ namespace Bit.App.Pages
             PageTitle = AppResources.PasswordHistory;
             History = new ExtendedObservableCollection<GeneratedPasswordHistory>();
             CopyCommand = new Command<GeneratedPasswordHistory>(CopyAsync);
+            AutoTypeCommand = new Command<GeneratedPasswordHistory>(AutoTypeAsync);
         }
 
         public Command CopyCommand { get; set; }
+        public Command AutoTypeCommand { get; set; }
         public ExtendedObservableCollection<GeneratedPasswordHistory> History { get; set; }
 
         public bool ShowNoData
