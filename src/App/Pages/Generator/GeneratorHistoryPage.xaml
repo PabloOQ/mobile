@@ -81,7 +81,7 @@
                         <controls:IconButton
                             StyleClass="box-row-button, box-row-button-platform"
                             Text="{Binding Source={x:Static core:BitwardenIcons.Send}}"
-                            Command="{Binding AutoTypeCommand, Source={x:Reference _page}}"
+                            Command="{Binding BindingContext.AutoTypeCommand, Source={x:Reference _page}}"
                             CommandParameter="{Binding .}"
                             Grid.Row="0"
                             Grid.Column="1"
