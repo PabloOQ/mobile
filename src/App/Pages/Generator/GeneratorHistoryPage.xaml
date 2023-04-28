@@ -65,6 +65,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
                         <controls:MonoLabel LineBreakMode="CharacterWrap"
@@ -78,12 +79,23 @@
                             StyleClass="list-subtitle, list-subtitle-platform"
                             Text="{Binding Date, Mode=OneWay, Converter={StaticResource dateTime}}" />
                         <controls:IconButton
+                            StyleClass="box-row-button, box-row-button-platform"
+                            Text="{Binding Source={x:Static core:BitwardenIcons.Send}}"
+                            Command="{Binding AutoTypeCommand, Source={x:Reference _page}}"
+                            CommandParameter="{Binding .}"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Grid.RowSpan="2"
+                            AutomationProperties.IsInAccessibleTree="True"
+                            AutomationProperties.Name="{u:I18n AutoTypePassword}"
+                            IsVisible="{Binding ShowAutoTyperButton, Source={x:Reference _page}}" />
+                        <controls:IconButton
                             StyleClass="list-row-button, list-row-button-platform"
                             Text="{Binding Source={x:Static core:BitwardenIcons.Paste}}"
                             Command="{Binding BindingContext.CopyCommand, Source={x:Reference _page}}"
                             CommandParameter="{Binding .}"
                             Grid.Row="0"
-                            Grid.Column="1"
+                            Grid.Column="2"
                             Grid.RowSpan="2"
                             AutomationProperties.IsInAccessibleTree="True"
                             AutomationProperties.Name="{u:I18n CopyPassword}" />
