@@ -10,8 +10,8 @@ namespace Bit.Core.Abstractions
         void Connect();
         void Disconnect();
         void Type(String text, LayoutType layout, SpeedType speed);
-        List<LayoutType> CompatibleLayouts();
+        List<LayoutType> GetCompatibleLayouts();
+        List<SpeedType> GetCompatibleSpeeds();
         AutoTyperProviderType GetProviderType();
-        int SpeedToValue(SpeedType speed);
     }
 }

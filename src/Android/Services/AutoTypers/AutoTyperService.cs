@@ -9,6 +9,7 @@ using Bit.App.Resources;
 
 namespace Bit.Droid.Services.AutoTypers
 {
+    // FIXME extract from android
     internal class AutoTyperService : IAutoTyperService
     {
         private readonly IStateService _stateService;
@@ -44,8 +45,9 @@ namespace Bit.Droid.Services.AutoTypers
 
         public async Task Type(string text, LayoutType layout, SpeedType speed)
         {
+            await Connect();
             // Check layout
-            if (!(await CompatibleLayouts()).Contains(layout))
+            if (!(await GetCompatibleLayouts()).Contains(layout))
             {
                 throw new ArgumentException("Layout not supported");
             }
@@ -64,7 +66,7 @@ namespace Bit.Droid.Services.AutoTypers
         private IAutoTyperProvider TyperService(AutoTyperProviderType? type) => type switch
         {
             AutoTyperProviderType.None => null,
-            AutoTyperProviderType.InputStick => new InputStick(),
+            AutoTyperProviderType.InputStickBroadcastAndroid => new InputStickBroadcastAndroid(),
             _ => null,
         };
 
@@ -90,19 +92,16 @@ namespace Bit.Droid.Services.AutoTypers
 
         public async Task<LayoutType> GetLayoutAsync()
         {
-            LayoutType layout;
-            var storedLayout = await _stateService.GetAutoTyperLayoutAsync();
-            var compatibleLayouts = await CompatibleLayouts();
-            if (storedLayout == null || !compatibleLayouts.Contains((LayoutType)storedLayout))
-            {
-                // FIXME choose default layout depending on language
-                layout = compatibleLayouts.First();
-            }
-            else
-            {
-                layout = (LayoutType)storedLayout;
-            }
-            return layout;
+            var layout = await GetLayoutAsync();
+            var compatibleLayouts = await GetCompatibleLayouts();
+            var defaultLayout = LayoutType.cs_CZ;
+            // Checks if the layout is in the list of compatible layouts
+            // If not, it defaults to defaultLayout
+            // If defaultLayout is not in the list, it defaults to the in the list
+            // FIXME default using culture
+            return layout == null ?
+                FindOrDefault(defaultLayout, compatibleLayouts, compatibleLayouts[0]) :
+                FindOrDefault(FindOrDefault((LayoutType)layout, compatibleLayouts, defaultLayout), compatibleLayouts, compatibleLayouts[0]);
         }
 
         public async Task SetLayoutAsync(LayoutType type)
@@ -112,67 +111,49 @@ namespace Bit.Droid.Services.AutoTypers
 
         public async Task<SpeedType> GetSpeedAsync()
         {
-            SpeedType speed;
-            var storedSpeed = await _stateService.GetAutoTyperSpeedAsync();
-            if (storedSpeed == null)
-            {
-                speed = SpeedType.Normal;
-            }
-            else
-            {
-                speed = (SpeedType)storedSpeed;
-            }
-            return speed;
+            var speed = await GetSpeedAsync();
+            var compatibleSpeeds = await GetCompatibleSpeeds();
+            var defaultSpeed = SpeedType.Normal;
+            // Checks if the speed is in the list of compatible layouts
+            // If not, it defaults to defaultSpeed
+            // If defaultSpeed is not in the list, it defaults to the in the list
+            return speed == null ?
+                FindOrDefault(defaultSpeed, compatibleSpeeds, compatibleSpeeds[0]) :
+                FindOrDefault(FindOrDefault((SpeedType)speed, compatibleSpeeds, defaultSpeed), compatibleSpeeds, compatibleSpeeds[0]);
         }
 
-        public async Task SetSpeedAsync(int speed)
+        public async Task SetSpeedAsync(SpeedType speed)
         {
             await _stateService.SetAutoTyperSpeedAsync((int)speed);
         }
 
-        public async Task<List<LayoutType>> CompatibleLayouts()
+        public async Task<List<LayoutType>> GetCompatibleLayouts()
         {
             if (typer == null)
             {
                 await InitializeTyper();
-                if (typer == null)
-                    return null;
             }
-            return typer.CompatibleLayouts();
+            return typer != null ?
+                typer.GetCompatibleLayouts() :
+                new List<LayoutType>();
+        }
+
+        public async Task<List<SpeedType>> GetCompatibleSpeeds()
+        {
+            if (typer == null)
+            {
+                await InitializeTyper();
+            }
+            return typer != null ?
+                typer.GetCompatibleSpeeds() :
+                new List<SpeedType>();
         }
 
         // Helpers
-        public static string LayoutText(LayoutType layout) => layout switch
+
+        private static T FindOrDefault<T>(T element, List<T> list, T def)
         {
-            LayoutType.cs_CZ =>     AppResources.AutoTyperLayoutCSCZ,
-            LayoutType.da_DK =>     AppResources.AutoTyperLayoutDADK,
-            LayoutType.de_CH =>     AppResources.AutoTyperLayoutDECH,
-            LayoutType.de_DE =>     AppResources.AutoTyperLayoutDEDE,
-            LayoutType.de_DE_MAC => AppResources.AutoTyperLayoutDEDEMAC,
-            LayoutType.el_GR =>     AppResources.AutoTyperLayoutELGR,
-            LayoutType.en_GB =>     AppResources.AutoTyperLayoutENGB,
-            LayoutType.en_US =>     AppResources.AutoTyperLayoutENUS,
-            LayoutType.en_US_DV =>  AppResources.AutoTyperLayoutENUSDV,
-            LayoutType.en_US_INT => AppResources.AutoTyperLayoutENUSINT,
-            LayoutType.es_ES =>     AppResources.AutoTyperLayoutESES,
-            LayoutType.fi_FI =>     AppResources.AutoTyperLayoutFIFI,
-            LayoutType.fr_CA =>     AppResources.AutoTyperLayoutFRCA,
-            LayoutType.fr_CH =>     AppResources.AutoTyperLayoutFRCH,
-            LayoutType.fr_BE =>     AppResources.AutoTyperLayoutFRBE,
-            LayoutType.fr_FR =>     AppResources.AutoTyperLayoutFRFR,
-            LayoutType.he_IL =>     AppResources.AutoTyperLayoutHEIL,
-            LayoutType.hr_HR =>     AppResources.AutoTyperLayoutHRHR,
-            LayoutType.hu_HU =>     AppResources.AutoTyperLayoutHUHU,
-            LayoutType.it_IT =>     AppResources.AutoTyperLayoutITIT,
-            LayoutType.nb_NO =>     AppResources.AutoTyperLayoutNBNO,
-            LayoutType.nl_NL =>     AppResources.AutoTyperLayoutNLNL,
-            LayoutType.pl_PL =>     AppResources.AutoTyperLayoutPLPL,
-            LayoutType.pt_BR =>     AppResources.AutoTyperLayoutPTBR,
-            LayoutType.pt_PT =>     AppResources.AutoTyperLayoutPTPT,
-            LayoutType.ru_RU =>     AppResources.AutoTyperLayoutRURU,
-            LayoutType.sk_SK =>     AppResources.AutoTyperLayoutSKSK,
-            LayoutType.sv_SE =>     AppResources.AutoTyperLayoutSVSE,
-            _ => null,
-        };
+            return list.Contains(element) ? element : def;
+        }
     }
 }

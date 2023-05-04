@@ -7,6 +7,6 @@ namespace Bit.Core.Enums
         [LocalizableEnum("Off")]
         None = 0,
         [LocalizableEnum("AutoTyperInputStick")]
-        InputStick = 1,
+        InputStickBroadcastAndroid = 1,
     }
 }

@@ -12,12 +12,12 @@ namespace Bit.Core.Abstractions
         Task Disconnect();
         Task Type(String text);
         Task Type(String text, LayoutType layout, SpeedType speed);
-        Task<List<LayoutType>> CompatibleLayouts();
+        Task<List<LayoutType>> GetCompatibleLayouts();
         Task<AutoTyperProviderType> GetProviderTypeAsync();
         Task SetProviderAsync(AutoTyperProviderType type);
         Task<LayoutType> GetLayoutAsync();
         Task SetLayoutAsync(LayoutType type);
         Task<SpeedType> GetSpeedAsync();
-        Task SetSpeedAsync(int speed);
+        Task SetSpeedAsync(SpeedType speed);
     }
 }

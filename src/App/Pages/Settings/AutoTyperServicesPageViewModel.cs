@@ -32,7 +32,7 @@ namespace Bit.App.Pages
             AutoTyperServiceOptions = new List<AutoTyperProviderType>
             {
                 AutoTyperProviderType.None,
-                AutoTyperProviderType.InputStick
+                AutoTyperProviderType.InputStickBroadcastAndroid
             };
 
             UpdateLayoutsAndSpeed();
