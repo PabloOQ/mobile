@@ -140,6 +140,7 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AutoTypers\AutoTyperService.cs" />
+    <Compile Include="Services\AutoTypers\AutoTyperWrapper.cs" />
     <Compile Include="Services\AutoTypers\InputStickBroadcastAndroid.cs" />
     <Compile Include="Services\BiometricService.cs" />
     <Compile Include="Services\CryptoPrimitiveService.cs" />

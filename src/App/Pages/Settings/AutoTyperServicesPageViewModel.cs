@@ -120,7 +120,7 @@ namespace Bit.App.Pages
         {
             if (_inited)
             {
-                await _stateService.SetAutoTyperProvider((int?)AutoTyperProviderTypeSelected);
+                await _stateService.SetAutoTyperProviderAsync((int?)AutoTyperProviderTypeSelected);
             }
         }
 

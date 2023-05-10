@@ -11,7 +11,26 @@ namespace Bit.Droid.Services.AutoTypers
 {
     public class InputStickBroadcastAndroid : IAutoTyperProvider
     {
-        private static readonly AutoTyperProviderType _type = AutoTyperProviderType.InputStickBroadcastAndroid;
+        public void Connect()
+        {
+            InputStickBroadcast.RequestConnection(Application.Context);
+        }
+
+        public void Disconnect()
+        {
+            InputStickBroadcast.ReleaseConnection(Application.Context);
+        }
+
+        public void Type(String text, LayoutType layout, SpeedType speed)
+        {
+            InputStickBroadcast.Type(Application.Context,
+                text,
+                _layouts.ContainsKey(layout) ? _layouts[layout] : _layouts[0], // Should not happen, this is a fallback
+                SpeedToValue(speed));
+        }
+
+        // Layouts
+        public static List<LayoutType> GetCompatibleLayouts() => _layouts.Keys.ToList();
 
         private static readonly Dictionary<LayoutType, string> _layouts = new Dictionary<LayoutType, string>()
         {
@@ -45,6 +64,8 @@ namespace Bit.Droid.Services.AutoTypers
             {LayoutType.sv_SE,      "sv-SE"}
         };
 
+        // Speeds
+        public static List<SpeedType> GetCompatibleSpeeds() => _speeds;
 
         private static readonly List<SpeedType> _speeds = new List<SpeedType>()
         {
@@ -54,39 +75,7 @@ namespace Bit.Droid.Services.AutoTypers
             SpeedType.Normal,
             SpeedType.Fast,
         };
-
-        public void Connect()
-        {
-            InputStickBroadcast.RequestConnection(Application.Context);
-        }
-
-        public void Disconnect()
-        {
-            InputStickBroadcast.ReleaseConnection(Application.Context);
-        }
-
-        public void Type(String text, LayoutType layout, SpeedType speed)
-        {
-            InputStickBroadcast.Type(Application.Context, text, _layouts[layout], SpeedToValue(speed));
-        }
-
-        public AutoTyperProviderType GetProviderType()
-        {
-            return _type;
-        }
-
-        public List<LayoutType> GetCompatibleLayouts()
-        {
-            return _layouts.Keys.ToList();
-        }
-
-        public List<SpeedType> GetCompatibleSpeeds()
-        {
-            return _speeds;
-        }
-        
-
-        private int SpeedToValue(SpeedType speed)
+        private static int SpeedToValue(SpeedType speed)
         {
             switch (speed)
             {
@@ -101,13 +90,11 @@ namespace Bit.Droid.Services.AutoTypers
                 default:
                     return 2;
 
-                case SpeedType.Fastest: // Not supported
-                case SpeedType.Faster:  // Not supported
+                case SpeedType.Fastest: // Not supported, default to Fast
+                case SpeedType.Faster:  // Not supported, default to Fast
                 case SpeedType.Fast:
                     return 1;
             }
         }
-
-
     }
 }

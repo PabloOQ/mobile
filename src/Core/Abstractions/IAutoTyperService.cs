@@ -8,16 +8,17 @@ namespace Bit.Core.Abstractions
 {
     public interface IAutoTyperService
     {
-        Task Connect();
-        Task Disconnect();
-        Task Type(String text);
-        Task Type(String text, LayoutType layout, SpeedType speed);
-        Task<List<LayoutType>> GetCompatibleLayouts();
+        Task<IAutoTyperWrapper> GetTyper();
         Task<AutoTyperProviderType> GetProviderTypeAsync();
         Task SetProviderAsync(AutoTyperProviderType type);
-        Task<LayoutType> GetLayoutAsync();
-        Task SetLayoutAsync(LayoutType type);
-        Task<SpeedType> GetSpeedAsync();
-        Task SetSpeedAsync(SpeedType speed);
+        Task<LayoutType> GetLayoutAsync(AutoTyperProviderType type);
+        Task SetLayoutAsync(LayoutType layout, AutoTyperProviderType type);
+        Task<SpeedType> GetSpeedAsync(AutoTyperProviderType type);
+        Task SetSpeedAsync(SpeedType speed, AutoTyperProviderType type);
+        List<LayoutType> GetCompatibleLayouts(AutoTyperProviderType type);
+        List<SpeedType> GetCompatibleSpeeds(AutoTyperProviderType type);
+        IAutoTyperProvider CreateTyper(AutoTyperProviderType? type);
+        AutoTyperProviderType ProviderType(IAutoTyperProvider? provider);
+
     }
 }

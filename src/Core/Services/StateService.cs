@@ -1330,7 +1330,7 @@ namespace Bit.Core.Services
             return provider;
         }
 
-        public async Task SetAutoTyperProvider(int? value, string userId = null)
+        public async Task SetAutoTyperProviderAsync(int? value, string userId = null)
         {
             var reconciledOptions = ReconcileOptions(new StorageOptions { UserId = userId },
                 await GetDefaultStorageOptionsAsync());

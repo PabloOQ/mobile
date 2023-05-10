@@ -164,7 +164,7 @@ namespace Bit.Core.Abstractions
         Task SetAvatarColorAsync(string value, string userId = null);
         Task<string> GetAvatarColorAsync(string userId = null);
         Task<int?> GetAutoTyperProviderAsync(string userId = null);
-        Task SetAutoTyperProvider(int? value, string userId = null);
+        Task SetAutoTyperProviderAsync(int? value, string userId = null);
         Task<int?> GetAutoTyperLayoutAsync(string userId = null);
         Task SetAutoTyperLayoutAsync(int? value, string userId = null);
         Task<int?> GetAutoTyperSpeedAsync(string userId = null);
