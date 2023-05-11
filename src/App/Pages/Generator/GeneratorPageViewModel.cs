@@ -24,6 +24,7 @@ namespace Bit.App.Pages
         private readonly ITokenService _tokenService;
         private readonly IDeviceActionService _deviceActionService;
         readonly LazyResolve<ILogger> _logger = new LazyResolve<ILogger>("logger");
+        private readonly IAutoTyperService _autoTyperService;
 
         private PasswordGenerationOptions _options;
         private UsernameGenerationOptions _usernameOptions;
@@ -36,6 +37,7 @@ namespace Bit.App.Pages
         private bool _number;
         private bool _special;
         private bool _allowAmbiguousChars;
+        private bool _autoTyperEnabled;
         private int _minNumber;
         private int _minSpecial;
         private int _length = 5;
@@ -64,6 +66,7 @@ namespace Bit.App.Pages
             _usernameGenerationService = ServiceContainer.Resolve<IUsernameGenerationService>();
             _tokenService = ServiceContainer.Resolve<ITokenService>();
             _deviceActionService = ServiceContainer.Resolve<IDeviceActionService>();
+            _autoTyperService = ServiceContainer.Resolve<IAutoTyperService>("autoTyperService");
 
             PageTitle = AppResources.Generator;
             GeneratorTypeOptions = new List<GeneratorType> {
@@ -99,6 +102,7 @@ namespace Bit.App.Pages
             ToggleForwardedEmailHiddenValueCommand = new AsyncCommand(ToggleForwardedEmailHiddenValueAsync, onException: ex => _logger.Value.Exception(ex), allowsMultipleExecutions: false);
             CopyCommand = new AsyncCommand(CopyAsync, onException: ex => _logger.Value.Exception(ex), allowsMultipleExecutions: false);
             CloseCommand = new AsyncCommand(CloseAsync, onException: ex => _logger.Value.Exception(ex), allowsMultipleExecutions: false);
+            AutoTypeCommand = new AsyncCommand(AutoTypeAsync, onException: ex => _logger.Value.Exception(ex), allowsMultipleExecutions: false);
         }
 
         public List<GeneratorType> GeneratorTypeOptions { get; set; }
@@ -113,6 +117,7 @@ namespace Bit.App.Pages
         public ICommand ToggleForwardedEmailHiddenValueCommand { get; set; }
         public ICommand CopyCommand { get; set; }
         public ICommand CloseCommand { get; set; }
+        public ICommand AutoTypeCommand { get; set; }
 
         public string Password
         {
@@ -169,6 +174,11 @@ namespace Bit.App.Pages
         public bool ShowUsernameEmailType
         {
             get => !string.IsNullOrWhiteSpace(EmailWebsite);
+        }
+
+        public bool ShowAutoTyperButton
+        {
+            get => _autoTyperEnabled;
         }
 
         public int Length
@@ -668,6 +678,9 @@ namespace Bit.App.Pages
             }
             TriggerUsernamePropertiesChanged();
 
+            _autoTyperEnabled = (await _autoTyperService.GetTyperWrapper()).IsEnabled();
+            TriggerPropertyChanged(nameof(ShowAutoTyperButton));
+
             _doneIniting = true;
         }
 
@@ -781,6 +794,12 @@ namespace Bit.App.Pages
             {
                 await Page.Navigation.PopModalAsync();
             }
+        }
+
+        public async Task AutoTypeAsync()
+        {
+            (await _autoTyperService.GetTyperWrapper()).Type(IsUsername ? Username : Password);
+            _platformUtilsService.ShowToast("info", null, string.Format(AppResources.AutoTyperSentToTyper, IsUsername ? AppResources.Username : AppResources.Password));
         }
 
         private void LoadFromOptions()

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Bit.App.Abstractions;
 using Bit.App.Pages.Accounts;
 using Bit.App.Resources;
+using Bit.App.Utilities;
 using Bit.Core.Abstractions;
 using Bit.Core.Enums;
 using Bit.Core.Models;
@@ -38,6 +39,7 @@ namespace Bit.App.Pages
         private readonly IPushNotificationService _pushNotificationService;
         private readonly IAuthService _authService;
         private readonly IWatchDeviceService _watchDeviceService;
+        private readonly IAutoTyperService _autoTyperService;
         private const int CustomVaultTimeoutValue = -100;
 
         private bool _supportsBiometric;
@@ -51,6 +53,7 @@ namespace Bit.App.Pages
         private bool _reportLoggingEnabled;
         private bool _approvePasswordlessLoginRequests;
         private bool _shouldConnectToWatch;
+        private IAutoTyperWrapper _autoTyper;
         private List<KeyValuePair<string, int?>> _vaultTimeouts =
             new List<KeyValuePair<string, int?>>
             {
@@ -95,6 +98,7 @@ namespace Bit.App.Pages
             _pushNotificationService = ServiceContainer.Resolve<IPushNotificationService>();
             _authService = ServiceContainer.Resolve<IAuthService>();
             _watchDeviceService = ServiceContainer.Resolve<IWatchDeviceService>();
+            _autoTyperService = ServiceContainer.Resolve<IAutoTyperService>("autoTyperService");
             GroupedItems = new ObservableRangeCollection<ISettingsPageListItem>();
             PageTitle = AppResources.Settings;
 
@@ -146,6 +150,7 @@ namespace Bit.App.Pages
             _reportLoggingEnabled = await _loggerService.IsEnabled();
             _approvePasswordlessLoginRequests = await _stateService.GetApprovePasswordlessLoginsAsync();
             _shouldConnectToWatch = await _stateService.GetShouldConnectToWatchAsync();
+            _autoTyper = await _autoTyperService.GetTyperWrapper();
 
             BuildList();
         }
@@ -514,13 +519,13 @@ namespace Bit.App.Pages
                 });
             }
             var autoTyperItems = new List<SettingsPageListItem>();
-            if (Device.RuntimePlatform == Device.Android)
+            if (_autoTyperService.GetCompatibleProviders().Count != 0)
             {
                 autoTyperItems.Add(new SettingsPageListItem
                 {
                     Name = AppResources.AutoTyperServices,
-                    SubLabel = "TODO",
-                    ExecuteAsync = () => Page.Navigation.PushModalAsync(new NavigationPage(new AutoTyperServicesPage()))
+                    SubLabel = _autoTyper.IsEnabled() ? AppResources.On : AppResources.Off,
+                    ExecuteAsync = () => Page.Navigation.PushModalAsync(new NavigationPage(new AutoTyperServicesPage(Page as SettingsPage)))
                 });
             }
             var manageItems = new List<SettingsPageListItem>

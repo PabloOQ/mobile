@@ -77,49 +77,65 @@
                 <Grid IsVisible="{Binding IsUsername, Converter={StaticResource inverseBool}}"
                         StyleClass="box-row"
                         RowDefinitions="Auto"
-                        ColumnDefinitions="*,Auto,Auto">
+                        ColumnDefinitions="*,Auto,Auto,Auto">
                     <controls:MonoLabel
                         x:Name="lblPassword"
                         StyleClass="text-lg, text-html"
                         Text="{Binding ColoredPassword, Mode=OneWay}"
                         Margin="0, 20" />
+                    <controls:IconButton
+                        StyleClass="box-row-button, box-row-button-platform"
+                        Text="{Binding Source={x:Static core:BitwardenIcons.Send}}"
+                        Command="{Binding AutoTypeCommand}"
+                        Grid.Column="1"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationProperties.Name="{u:I18n AutoTypePassword}"
+                        IsVisible="{Binding ShowAutoTyperButton}" />
                     <controls:IconButton 
                         StyleClass="box-row-button, box-row-button-platform"
                         Text="{Binding Source={x:Static core:BitwardenIcons.Clone}}"
                         Command="{Binding CopyCommand}"
-                        Grid.Column="1"
+                        Grid.Column="2"
                         AutomationProperties.IsInAccessibleTree="True"
                         AutomationProperties.Name="{u:I18n CopyPassword}" />
                     <controls:IconButton 
                         StyleClass="box-row-button, box-row-button-platform"
                         Text="{Binding Source={x:Static core:BitwardenIcons.Generate}}"
                         Command="{Binding RegenerateCommand}"
-                        Grid.Column="2"
+                        Grid.Column="3"
                         AutomationProperties.IsInAccessibleTree="True"
                         AutomationProperties.Name="{u:I18n GeneratePassword}" />
                 </Grid>
                 <Grid IsVisible="{Binding IsUsername}"
                         StyleClass="box-row"                  
                         RowDefinitions="Auto"
-                        ColumnDefinitions="*,Auto,Auto">
+                        ColumnDefinitions="*,Auto,Auto,Auto">
                     <controls:MonoLabel
                         x:Name="lblUsername"
                         StyleClass="text-lg, text-html"
                         Text="{Binding ColoredUsername, Mode=OneWay}"
                         Margin="0, 20"
                         HorizontalOptions="Start" />
+                    <controls:IconButton
+                        StyleClass="box-row-button, box-row-button-platform"
+                        Text="{Binding Source={x:Static core:BitwardenIcons.Send}}"
+                        Command="{Binding AutoTypeCommand}"
+                        Grid.Column="1"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationProperties.Name="{u:I18n AutoTypeUsername}"
+                        IsVisible="{Binding ShowAutoTyperButton}" />
                     <controls:IconButton 
                         StyleClass="box-row-button, box-row-button-platform"
                         Text="{Binding Source={x:Static core:BitwardenIcons.Clone}}"
                         Command="{Binding CopyCommand}"
-                        Grid.Column="1"
+                        Grid.Column="3"
                         AutomationProperties.IsInAccessibleTree="True"
                         AutomationProperties.Name="{u:I18n CopyUsername}" />
                     <controls:IconButton 
                         StyleClass="box-row-button, box-row-button-platform"
                         Text="{Binding Source={x:Static core:BitwardenIcons.Generate}}"
                         Command="{Binding RegenerateUsernameCommand}"
-                        Grid.Column="2"
+                        Grid.Column="3"
                         AutomationProperties.IsInAccessibleTree="True"
                         AutomationProperties.Name="{u:I18n GenerateUsername}" />
                 </Grid>

@@ -22,12 +22,11 @@ namespace Bit.Droid.Services.AutoTypers
         public async Task LoadAsync()
         {
             var typer = await _autoTyperService.GetProviderTypeAsync();
+            this.typer = _autoTyperService.CreateTyper(typer);
             if (typer != AutoTyperProviderType.None)
             {
-                var layout = _autoTyperService.GetLayoutAsync(typer);
-                var speed = _autoTyperService.GetSpeedAsync(typer);
-                this.layout = await layout;
-                this.speed = await speed;
+                layout = await _autoTyperService.GetLayoutAsync(typer);
+                speed = await _autoTyperService.GetSpeedAsync(typer);
             }
         }
 

@@ -18,7 +18,7 @@ namespace Bit.Droid.Services.AutoTypers
             _stateService = stateService;
         }
 
-        public async Task<IAutoTyperWrapper> GetTyper()
+        public async Task<IAutoTyperWrapper> GetTyperWrapper()
         {
             await InitializeTyper();
             return typer;
@@ -38,7 +38,7 @@ namespace Bit.Droid.Services.AutoTypers
         public async Task SetProviderAsync(AutoTyperProviderType type)
         {
             await _stateService.SetAutoTyperProviderAsync((int)type);
-            await (await GetTyper()).LoadAsync();
+            await (await GetTyperWrapper()).LoadAsync();
         }
 
         public async Task<LayoutType> GetLayoutAsync(AutoTyperProviderType type)

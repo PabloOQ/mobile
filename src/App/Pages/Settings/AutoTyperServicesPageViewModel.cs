@@ -1,10 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Bit.App.Abstractions;
 using Bit.App.Resources;
-using Bit.App.Services;
-using Bit.App.Utilities;
 using Bit.Core.Abstractions;
 using Bit.Core.Enums;
 using Bit.Core.Utilities;
@@ -13,41 +9,36 @@ namespace Bit.App.Pages
 {
     public class AutoTyperServicesPageViewModel : BaseViewModel
     {
-        private readonly IStateService _stateService;
+        private readonly IAutoTyperService _autoTyperService;
 
         private bool _inited;
-        private AutoTyperProviderType _autoTyperProviderTypeSelected;
+        private AutoTyperProviderType _providerTypeSelected;
         private LayoutType _layoutTypeSelected;
         private SpeedType _speedTypeSelected;
-        public List<AutoTyperProviderType> AutoTyperServiceOptions { get; set; }
+        public List<AutoTyperProviderType> ProviderOptions { get; set; }
         public List<LayoutType> LayoutOptions { get; set; }
         public List<SpeedType> SpeedOptions { get; set; }
 
         public AutoTyperServicesPageViewModel()
         {
-            _stateService = ServiceContainer.Resolve<IStateService>("stateService");
+            _autoTyperService = ServiceContainer.Resolve<IAutoTyperService>("autoTyperService");
             PageTitle = AppResources.AutoTyperServices;
 
-            // Depends on the device
-            AutoTyperServiceOptions = new List<AutoTyperProviderType>
-            {
-                AutoTyperProviderType.None,
-                AutoTyperProviderType.InputStickBroadcastAndroid
-            };
-
-            UpdateLayoutsAndSpeed();
+            var providers = new List<AutoTyperProviderType> { AutoTyperProviderType.None };
+            providers.AddRange(_autoTyperService.GetCompatibleProviders());
+            ProviderOptions = providers;
         }
 
-        public AutoTyperProviderType AutoTyperProviderTypeSelected
+        public AutoTyperProviderType ProviderTypeSelected
         {
-            get => _autoTyperProviderTypeSelected;
+            get => _providerTypeSelected;
             set
             {
-                if (SetProperty(ref _autoTyperProviderTypeSelected, value))
+                if (SetProperty(ref _providerTypeSelected, value))
                 {
                     SaveAutoTyperProviderAsync().FireAndForget();
+                    UpdateUIAsync().FireAndForget();
                 }
-                UpdateLayoutsAndSpeed();
             }
         }
 
@@ -75,52 +66,37 @@ namespace Bit.App.Pages
             }
         }
 
-        private void UpdateLayoutsAndSpeed()
-        {
-            // get from the provider
-            var compatibleLayouts = System.Enum.GetValues(typeof(LayoutType)).Cast<LayoutType>().ToList();
-            LayoutOptions = new List<LayoutType>(compatibleLayouts);
-
-            SpeedOptions = new List<SpeedType>
-            {
-                SpeedType.Slowest,
-                SpeedType.Slower,
-                SpeedType.Slow,
-                SpeedType.Normal,
-                SpeedType.Fast,
-                SpeedType.Faster,
-                SpeedType.Fastest
-            };
-        }
+        public bool AreSettingsVisible => ProviderTypeSelected != AutoTyperProviderType.None;
 
         public async Task InitAsync()
         {
-            var autoTyperProvider = await _stateService.GetAutoTyperProviderAsync();
-            AutoTyperProviderTypeSelected = autoTyperProvider == null ?
-                AutoTyperProviderType.None : (AutoTyperProviderType)autoTyperProvider;
-            // get from the provider
-            var compatibleLayouts = System.Enum.GetValues(typeof(LayoutType)).Cast<LayoutType>().ToList();
-
-            var layout = await _stateService.GetAutoTyperLayoutAsync();
-            LayoutTypeSelected = layout == null ?
-                LayoutOptions[0] :
-                compatibleLayouts.Contains((LayoutType)layout) ?
-                    (LayoutType)layout :
-                    LayoutOptions[0];
-
-            var speed = await _stateService.GetAutoTyperSpeedAsync();
-            SpeedTypeSelected = speed == null ?
-                SpeedType.Normal :
-                (SpeedType)speed;
-
+            ProviderTypeSelected = await _autoTyperService.GetProviderTypeAsync();
+            await UpdateUIAsync();
             _inited = true;
+        }
+
+        public async Task UpdateUIAsync()
+        {
+            TriggerPropertyChanged(nameof(AreSettingsVisible));
+            if (ProviderTypeSelected != AutoTyperProviderType.None)
+            {
+                LayoutOptions = _autoTyperService.GetCompatibleLayouts(ProviderTypeSelected);
+                TriggerPropertyChanged(nameof(LayoutOptions));
+                SpeedOptions = _autoTyperService.GetCompatibleSpeeds(ProviderTypeSelected);
+                TriggerPropertyChanged(nameof(SpeedOptions));
+                LayoutTypeSelected = await _autoTyperService.GetLayoutAsync(ProviderTypeSelected);
+                TriggerPropertyChanged(nameof(LayoutTypeSelected));
+                SpeedTypeSelected = await _autoTyperService.GetSpeedAsync(ProviderTypeSelected);
+                TriggerPropertyChanged(nameof(SpeedTypeSelected));
+            }
+            // FIXME visibility
         }
 
         private async Task SaveAutoTyperProviderAsync()
         {
             if (_inited)
             {
-                await _stateService.SetAutoTyperProviderAsync((int?)AutoTyperProviderTypeSelected);
+                await _autoTyperService.SetProviderAsync(ProviderTypeSelected);
             }
         }
 
@@ -128,7 +104,7 @@ namespace Bit.App.Pages
         {
             if (_inited)
             {
-                await _stateService.SetAutoTyperLayoutAsync((int?)LayoutTypeSelected);
+                await _autoTyperService.SetLayoutAsync(LayoutTypeSelected, ProviderTypeSelected);
             }
         }
 
@@ -136,7 +112,7 @@ namespace Bit.App.Pages
         {
             if (_inited)
             {
-                await _stateService.SetAutoTyperSpeedAsync((int?)SpeedTypeSelected);
+                await _autoTyperService.SetSpeedAsync(SpeedTypeSelected, ProviderTypeSelected);
             }
         }
     }

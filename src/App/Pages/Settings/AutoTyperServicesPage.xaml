@@ -27,8 +27,8 @@
                             StyleClass="box-label" />
                         <Picker
                             x:Name="_autoTyperPicker"
-                            ItemsSource="{Binding AutoTyperServiceOptions, Mode=OneTime}"
-                            SelectedItem="{Binding AutoTyperProviderTypeSelected}"
+                            ItemsSource="{Binding ProviderOptions, Mode=OneTime}"
+                            SelectedItem="{Binding ProviderTypeSelected}"
                             ItemDisplayBinding="{Binding ., Converter={StaticResource localizableEnum}}"
                             StyleClass="box-value" />
                     </StackLayout>
@@ -36,37 +36,40 @@
                         StyleClass="box-footer-label"
                         Text="{u:I18n AutoTyperDescription}" />
                 </StackLayout>
-                <StackLayout StyleClass="box">
-                    <StackLayout StyleClass="box-row, box-row-input, box-row-input-options-platform">
+                <StackLayout StyleClass="box" Padding="0"
+                             IsVisible="{Binding AreSettingsVisible}">
+                    <StackLayout StyleClass="box">
+                        <StackLayout StyleClass="box-row, box-row-input, box-row-input-options-platform">
+                            <Label
+                                Text="{u:I18n AutoTyperService}"
+                                StyleClass="box-label" />
+                            <Picker
+                                x:Name="_layoutPicker"
+                                ItemsSource="{Binding LayoutOptions}"
+                                SelectedItem="{Binding LayoutTypeSelected}"
+                                ItemDisplayBinding="{Binding ., Converter={StaticResource localizableEnum}}"
+                                StyleClass="box-value" />
+                        </StackLayout>
                         <Label
-                            Text="{u:I18n AutoTyperService}"
-                            StyleClass="box-label" />
-                        <Picker
-                            x:Name="_layoutPicker"
-                            ItemsSource="{Binding LayoutOptions}"
-                            SelectedItem="{Binding LayoutTypeSelected}"
-                            ItemDisplayBinding="{Binding ., Converter={StaticResource localizableEnum}}"
-                            StyleClass="box-value" />
+                            StyleClass="box-footer-label"
+                            Text="{u:I18n AutoTyperDescription}" />
                     </StackLayout>
-                    <Label
-                        StyleClass="box-footer-label"
-                        Text="{u:I18n AutoTyperDescription}" />
-                </StackLayout>
-                <StackLayout StyleClass="box">
-                    <StackLayout StyleClass="box-row, box-row-input, box-row-input-options-platform">
+                    <StackLayout StyleClass="box">
+                        <StackLayout StyleClass="box-row, box-row-input, box-row-input-options-platform">
+                            <Label
+                                Text="{u:I18n AutoTyperService}"
+                                StyleClass="box-label" />
+                            <Picker
+                                x:Name="_speedPicker"
+                                ItemsSource="{Binding SpeedOptions}"
+                                SelectedItem="{Binding SpeedTypeSelected}"
+                                ItemDisplayBinding="{Binding ., Converter={StaticResource localizableEnum}}"
+                                StyleClass="box-value" />
+                        </StackLayout>
                         <Label
-                            Text="{u:I18n AutoTyperService}"
-                            StyleClass="box-label" />
-                        <Picker
-                            x:Name="_speedPicker"
-                            ItemsSource="{Binding SpeedOptions}"
-                            SelectedItem="{Binding SpeedTypeSelected}"
-                            ItemDisplayBinding="{Binding ., Converter={StaticResource localizableEnum}}"
-                            StyleClass="box-value" />
+                            StyleClass="box-footer-label"
+                            Text="{u:I18n AutoTyperDescription}" />
                     </StackLayout>
-                    <Label
-                        StyleClass="box-footer-label"
-                        Text="{u:I18n AutoTyperDescription}" />
                 </StackLayout>
             </StackLayout>
         </ScrollView>
