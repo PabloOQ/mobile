@@ -727,7 +727,7 @@ namespace Bit.App.Pages
 
             if (text != null)
             {
-                await _autoTyperService.Type(text);
+                (await _autoTyperService.GetTyperWrapper()).Type(text);
                 if (!string.IsNullOrWhiteSpace(name))
                 {
                     _platformUtilsService.ShowToast("info", null, string.Format(AppResources.AutoTyperSentToTyper, name));

@@ -78,7 +78,7 @@ namespace Bit.App.Pages
 
         private async void AutoTypeAsync(GeneratedPasswordHistory ph)
         {
-            await _autoTyperService.Type(ph.Password);
+            (await _autoTyperService.GetTyperWrapper()).Type(ph.Password);
             _platformUtilsService.ShowToast("info", null, string.Format(AppResources.AutoTyperSentToTyper, AppResources.Password));
         }
 
