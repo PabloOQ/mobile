@@ -22,7 +22,6 @@ namespace Bit.App.Pages
         private readonly IStateService _stateService;
 
         private bool _showNoData;
-        private bool _autoTyperServiceEnabled;
 
         public GeneratorHistoryPageViewModel()
         {
@@ -48,7 +47,7 @@ namespace Bit.App.Pages
             get => _showNoData;
             set => SetProperty(ref _showNoData, value);
         }
-        public bool ShowAutoTyperButton => _autoTyperServiceEnabled;
+        public bool ShowAutoTyperButton => _autoTyperService.GetTyperWrapper().IsEnabled();
 
         public async Task InitAsync()
         {
@@ -58,9 +57,6 @@ namespace Bit.App.Pages
                 History.ResetWithRange(history ?? new List<GeneratedPasswordHistory>());
                 ShowNoData = History.Count == 0;
             });
-            var autoTyperProvider = await _stateService.GetAutoTyperProviderAsync();
-            _autoTyperServiceEnabled = autoTyperProvider != null &&
-                (AutoTyperProviderType)Enum.ToObject(typeof(AutoTyperProviderType), autoTyperProvider) != AutoTyperProviderType.None;
         }
 
         public async Task ClearAsync()
@@ -78,7 +74,7 @@ namespace Bit.App.Pages
 
         private async void AutoTypeAsync(GeneratedPasswordHistory ph)
         {
-            (await _autoTyperService.GetTyperWrapper()).Type(ph.Password);
+            _autoTyperService.GetTyperWrapper().Type(ph.Password);
             _platformUtilsService.ShowToast("info", null, string.Format(AppResources.AutoTyperSentToTyper, AppResources.Password));
         }
 

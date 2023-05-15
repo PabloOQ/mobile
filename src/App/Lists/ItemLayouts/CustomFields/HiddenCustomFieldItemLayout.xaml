@@ -26,6 +26,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Label
             Text="{Binding Field.Name, Mode=OneWay}"
@@ -63,13 +64,23 @@
                 </Keyboard>
             </Entry.Keyboard>
         </controls:MonoEntry>
+        <controls:IconButton
+            StyleClass="box-row-button, box-row-button-platform"
+            Text="{Binding Source={x:Static core:BitwardenIcons.Send}}"
+            Command="{Binding AutoTypeFieldCommand}"
+            IsVisible="{Binding ShowAutoTyperButton}"
+            Grid.Row="0"
+            Grid.Column="1"
+            Grid.RowSpan="2"
+            AutomationProperties.IsInAccessibleTree="True"
+            AutomationProperties.Name="{u:I18n AutoType}" />
         <controls:IconButton 
             StyleClass="box-row-button, box-row-button-platform"
             Text="{Binding ShowHiddenValue, Converter={StaticResource iconGlyphConverter}, ConverterParameter={x:Static u:BooleanGlyphType.Eye}}"
             Command="{Binding ToggleHiddenValueCommand}"
             IsVisible="{Binding ShowViewHidden}"
             Grid.Row="0"
-            Grid.Column="1"
+            Grid.Column="2"
             Grid.RowSpan="2"
             AutomationProperties.IsInAccessibleTree="True"
             AutomationProperties.Name="{u:I18n ToggleVisibility}" />
@@ -79,7 +90,7 @@
             Command="{Binding CopyFieldCommand}"
             IsVisible="{Binding ShowCopyButton}"
             Grid.Row="0"
-            Grid.Column="2"
+            Grid.Column="3"
             Grid.RowSpan="2"
             AutomationProperties.IsInAccessibleTree="True"
             AutomationProperties.Name="{u:I18n Copy}" />
@@ -89,7 +100,7 @@
             Command="{Binding FieldOptionsCommand}"
             IsVisible="{Binding IsEditing}"
             Grid.Row="0"
-            Grid.Column="2"
+            Grid.Column="3"
             Grid.RowSpan="2"
             AutomationProperties.IsInAccessibleTree="True"
             AutomationProperties.Name="{u:I18n Options}" />

@@ -8,7 +8,9 @@ namespace Bit.Core.Abstractions
 {
     public interface IAutoTyperService
     {
-        Task<IAutoTyperWrapper> GetTyperWrapper();
+        IAutoTyperWrapper GetTyperWrapper();
+
+        Task InitAsync();
 
         Task<AutoTyperProviderType> GetProviderTypeAsync();
         Task SetProviderAsync(AutoTyperProviderType type);

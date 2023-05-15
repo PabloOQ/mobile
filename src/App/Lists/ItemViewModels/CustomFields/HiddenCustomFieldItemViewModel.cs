@@ -15,6 +15,7 @@ namespace Bit.App.Lists.ItemViewModels.CustomFields
         private readonly IPasswordPromptable _passwordPromptable;
         private readonly IEventService _eventService;
         private bool _showHiddenValue;
+        private IAutoTyperWrapper _autoTyper;
 
         public HiddenCustomFieldItemViewModel(FieldView field,
                                               bool isEditing,
@@ -22,7 +23,9 @@ namespace Bit.App.Lists.ItemViewModels.CustomFields
                                               CipherView cipher,
                                               IPasswordPromptable passwordPromptable,
                                               IEventService eventService,
-                                              ICommand copyFieldCommand)
+                                              ICommand copyFieldCommand,
+                                              IAutoTyperWrapper autoTyper,
+                                              ICommand autoTypeFieldCommand)
             : base(field, isEditing, fieldOptionsCommand)
         {
             _cipher = cipher;
@@ -30,6 +33,7 @@ namespace Bit.App.Lists.ItemViewModels.CustomFields
             _eventService = eventService;
 
             CopyFieldCommand = new Command(() => copyFieldCommand?.Execute(Field));
+            AutoTypeFieldCommand = new Command(() => autoTypeFieldCommand?.Execute(Field));
             ToggleHiddenValueCommand = new AsyncCommand(ToggleHiddenValueAsync, (Func<bool>)null, ex =>
             {
 #if !FDROID
@@ -38,6 +42,7 @@ namespace Bit.App.Lists.ItemViewModels.CustomFields
             });
         }
 
+        public ICommand AutoTypeFieldCommand { get; }
         public ICommand CopyFieldCommand { get; }
 
         public ICommand ToggleHiddenValueCommand { get; set; }
@@ -49,6 +54,8 @@ namespace Bit.App.Lists.ItemViewModels.CustomFields
         }
 
         public bool ShowViewHidden => _cipher.ViewPassword || (_isEditing && _field.NewField);
+
+        public override bool ShowAutoTyperButton => _autoTyper.IsEnabled();
 
         public override bool ShowCopyButton => !_isEditing && _cipher.ViewPassword && !string.IsNullOrWhiteSpace(Field.Value);
 

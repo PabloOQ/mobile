@@ -986,6 +986,24 @@ namespace Bit.App.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to InputStick (hardware) is required. InputStickUtility (software) is required. Please configure a password for InputStick in the InputStickUtility app..
+        /// </summary>
+        public static string AutoTyperInputStickBroadcastDescription {
+            get {
+                return ResourceManager.GetString("AutoTyperInputStickBroadcastDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Layout.
+        /// </summary>
+        public static string AutoTyperLayout {
+            get {
+                return ResourceManager.GetString("AutoTyperLayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Czech (Czech Republic).
         /// </summary>
         public static string AutoTyperLayoutCSCZ {
@@ -1261,6 +1279,15 @@ namespace Bit.App.Resources {
         public static string AutoTyperServices {
             get {
                 return ResourceManager.GetString("AutoTyperServices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Speed.
+        /// </summary>
+        public static string AutoTyperSpeed {
+            get {
+                return ResourceManager.GetString("AutoTyperSpeed", resourceCulture);
             }
         }
         

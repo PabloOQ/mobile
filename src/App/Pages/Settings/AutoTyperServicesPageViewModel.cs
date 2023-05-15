@@ -66,6 +66,8 @@ namespace Bit.App.Pages
             }
         }
 
+        public string ProviderDescription { get; set; }
+
         public bool AreSettingsVisible => ProviderTypeSelected != AutoTyperProviderType.None;
 
         public async Task InitAsync()
@@ -80,6 +82,8 @@ namespace Bit.App.Pages
             TriggerPropertyChanged(nameof(AreSettingsVisible));
             if (ProviderTypeSelected != AutoTyperProviderType.None)
             {
+                ProviderDescription = GetProviderDescription(ProviderTypeSelected);
+                TriggerPropertyChanged(nameof(ProviderDescription));
                 LayoutOptions = _autoTyperService.GetCompatibleLayouts(ProviderTypeSelected);
                 TriggerPropertyChanged(nameof(LayoutOptions));
                 SpeedOptions = _autoTyperService.GetCompatibleSpeeds(ProviderTypeSelected);
@@ -89,7 +93,18 @@ namespace Bit.App.Pages
                 SpeedTypeSelected = await _autoTyperService.GetSpeedAsync(ProviderTypeSelected);
                 TriggerPropertyChanged(nameof(SpeedTypeSelected));
             }
-            // FIXME visibility
+        }
+
+        private string GetProviderDescription(AutoTyperProviderType providerType)
+        {
+            switch (providerType)
+            {
+                case AutoTyperProviderType.InputStickBroadcastAndroid:
+                    return AppResources.AutoTyperInputStickBroadcastDescription;
+                case AutoTyperProviderType.None:
+                default:
+                    return AppResources.AutoTyperDescription;
+            }
         }
 
         private async Task SaveAutoTyperProviderAsync()

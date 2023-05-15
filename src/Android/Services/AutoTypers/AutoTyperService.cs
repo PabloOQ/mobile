@@ -18,35 +18,35 @@ namespace Bit.Droid.Services.AutoTypers
             _stateService = stateService;
         }
 
-        public async Task<IAutoTyperWrapper> GetTyperWrapper()
+        public IAutoTyperWrapper GetTyperWrapper()
         {
-            await InitializeTyper();
             return typer;
         }
 
-        private async Task InitializeTyper()
+        public async Task InitAsync()
         {
-            typer ??= new AutoTyperWrapper((AutoTyperProviderType)await _stateService.GetAutoTyperProviderAsync(), this);
+            typer ??= new AutoTyperWrapper(await GetProviderTypeAsync(), this);
             await typer.LoadAsync();
         }
+
         // Getters and setters
         public async Task<AutoTyperProviderType> GetProviderTypeAsync()
         {
-            var provider = (AutoTyperProviderType?)await _stateService.GetAutoTyperProviderAsync();
+            var provider = (AutoTyperProviderType?) await _stateService.GetAutoTyperProviderAsync();
             return provider ?? AutoTyperProviderType.None;
         }
         public async Task SetProviderAsync(AutoTyperProviderType type)
         {
             await _stateService.SetAutoTyperProviderAsync((int)type);
-            await (await GetTyperWrapper()).LoadAsync();
+            await GetTyperWrapper().LoadAsync();
         }
 
         public async Task<LayoutType> GetLayoutAsync(AutoTyperProviderType type)
         {
-            var layout = (LayoutType)await _stateService.GetAutoTyperLayoutAsync();
-            var compatibleLayouts = GetCompatibleLayouts(type);
             // FIXME default using culture
             var defaultLayout = LayoutType.cs_CZ;
+            var layout = (LayoutType?) await _stateService.GetAutoTyperLayoutAsync() ?? defaultLayout;
+            var compatibleLayouts = GetCompatibleLayouts(type);
             return Validate(layout, compatibleLayouts, defaultLayout);
         }
 
@@ -57,9 +57,9 @@ namespace Bit.Droid.Services.AutoTypers
 
         public async Task<SpeedType> GetSpeedAsync(AutoTyperProviderType type)
         {
-            var speed = (SpeedType)await _stateService.GetAutoTyperSpeedAsync();
-            var compatibleSpeeds = GetCompatibleSpeeds(type);
             var defaultSpeed = SpeedType.Normal;
+            var speed = (SpeedType?) await _stateService.GetAutoTyperSpeedAsync() ?? defaultSpeed;
+            var compatibleSpeeds = GetCompatibleSpeeds(type);
             return Validate(speed, compatibleSpeeds, defaultSpeed);
         }
 
@@ -114,9 +114,7 @@ namespace Bit.Droid.Services.AutoTypers
          */
         private static T Validate<T>(T element, List<T> list, T def)
         {
-            return element is null ?
-                FindOrDefault(def, list, list[0]) :
-                FindOrDefault(FindOrDefault((T)element, list, def), list, list[0]);
+            return FindOrDefault(FindOrDefault(element, list, def), list, list[0]);
         }
 
         /**

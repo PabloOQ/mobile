@@ -36,6 +36,7 @@ namespace Bit.App.Lists.ItemViewModels.CustomFields
         public bool IsEditing => _isEditing;
 
         public virtual bool ShowCopyButton => false;
+        public virtual bool ShowAutoTyperButton => false;
 
         public virtual string ValueText => _field.Value;
 

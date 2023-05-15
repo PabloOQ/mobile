@@ -678,7 +678,7 @@ namespace Bit.App.Pages
             }
             TriggerUsernamePropertiesChanged();
 
-            _autoTyperEnabled = (await _autoTyperService.GetTyperWrapper()).IsEnabled();
+            _autoTyperEnabled = _autoTyperService.GetTyperWrapper().IsEnabled();
             TriggerPropertyChanged(nameof(ShowAutoTyperButton));
 
             _doneIniting = true;
@@ -798,7 +798,7 @@ namespace Bit.App.Pages
 
         public async Task AutoTypeAsync()
         {
-            (await _autoTyperService.GetTyperWrapper()).Type(IsUsername ? Username : Password);
+            _autoTyperService.GetTyperWrapper().Type(IsUsername ? Username : Password);
             _platformUtilsService.ShowToast("info", null, string.Format(AppResources.AutoTyperSentToTyper, IsUsername ? AppResources.Username : AppResources.Password));
         }
 

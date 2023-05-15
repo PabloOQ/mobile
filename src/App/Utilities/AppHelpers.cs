@@ -551,6 +551,8 @@ namespace Bit.App.Utilities
             await ClearServiceCacheAsync();
             var deviceActionService = ServiceContainer.Resolve<IDeviceActionService>("deviceActionService");
             await deviceActionService.OnAccountSwitchCompleteAsync();
+            var autoTyperService = ServiceContainer.Resolve<IAutoTyperService>("autoTyperService");
+            await autoTyperService.InitAsync();
         }
 
         public static async Task ClearServiceCacheAsync()

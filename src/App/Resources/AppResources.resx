@@ -2724,4 +2724,13 @@ Do you want to switch to this account?</value>
   <data name="AutoTypeTotp" xml:space="preserve">
     <value>Type TOTP</value>
   </data>
+  <data name="AutoTyperInputStickBroadcastDescription" xml:space="preserve">
+    <value>InputStick (hardware) is required. InputStickUtility (software) is required. Please configure a password for InputStick in the InputStickUtility app.</value>
+  </data>
+  <data name="AutoTyperLayout" xml:space="preserve">
+    <value>Layout</value>
+  </data>
+  <data name="AutoTyperSpeed" xml:space="preserve">
+    <value>Speed</value>
+  </data>
 </root>

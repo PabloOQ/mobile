@@ -150,7 +150,7 @@ namespace Bit.App.Pages
             _reportLoggingEnabled = await _loggerService.IsEnabled();
             _approvePasswordlessLoginRequests = await _stateService.GetApprovePasswordlessLoginsAsync();
             _shouldConnectToWatch = await _stateService.GetShouldConnectToWatchAsync();
-            _autoTyper = await _autoTyperService.GetTyperWrapper();
+            _autoTyper = _autoTyperService.GetTyperWrapper();
 
             BuildList();
         }

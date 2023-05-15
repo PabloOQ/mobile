@@ -51,7 +51,6 @@ namespace Bit.App.Pages
         private TotpHelper _totpTickHelper;
         private CancellationTokenSource _totpTickCancellationToken;
         private Task _totpTickTask;
-        private bool _autoTyperServiceEnabled;
 
         public CipherDetailsPageViewModel()
         {
@@ -73,6 +72,7 @@ namespace Bit.App.Pages
             CopyFieldCommand = new AsyncCommand<FieldView>(field => CopyAsync(field.Type == FieldType.Hidden ? "H_FieldValue" : "FieldValue", field.Value), onException: ex => _logger.Exception(ex), allowsMultipleExecutions: false);
             AutoTypeCommand = new AsyncCommand<string>((id) => AutoTypeAsync(id, null), onException: ex => _logger.Exception(ex), allowsMultipleExecutions: false);
             AutoTypeUriCommand = new AsyncCommand<LoginUriView>(uriView => AutoTypeAsync("LoginUri", uriView.Uri), onException: ex => _logger.Exception(ex), allowsMultipleExecutions: false);
+            AutoTypeFieldCommand = new AsyncCommand<FieldView>(field => AutoTypeAsync(field.Type == FieldType.Hidden ? "H_FieldValue" : "FieldValue", field.Value), onException: ex => _logger.Exception(ex), allowsMultipleExecutions: false);
             LaunchUriCommand = new Command<LoginUriView>(LaunchUri);
             TogglePasswordCommand = new Command(TogglePassword);
             ToggleCardNumberCommand = new Command(ToggleCardNumber);
@@ -87,6 +87,7 @@ namespace Bit.App.Pages
         public ICommand CopyFieldCommand { get; set; }
         public ICommand AutoTypeCommand { get; set; }
         public ICommand AutoTypeUriCommand { get; set; }
+        public ICommand AutoTypeFieldCommand { get; set; }
         public Command LaunchUriCommand { get; set; }
         public Command TogglePasswordCommand { get; set; }
         public Command ToggleCardNumberCommand { get; set; }
@@ -255,9 +256,9 @@ namespace Bit.App.Pages
         public double TotpProgress => string.IsNullOrEmpty(TotpSec) ? 0 : double.Parse(TotpSec) * 100 / _totpInterval;
         public bool IsDeleted => Cipher.IsDeleted;
         public bool CanEdit => !Cipher.IsDeleted;
-        public bool ShowAutoTyperPasswordButton => _autoTyperServiceEnabled && Cipher.ViewPassword;
-        public bool ShowAutoTyperTotpButton => _autoTyperServiceEnabled && _canAccessPremium;
-        public bool ShowAutoTyperButton => _autoTyperServiceEnabled;
+        public bool ShowAutoTyperPasswordButton => _autoTyperService.GetTyperWrapper().IsEnabled() && Cipher.ViewPassword;
+        public bool ShowAutoTyperTotpButton => _autoTyperService.GetTyperWrapper().IsEnabled() && _canAccessPremium;
+        public bool ShowAutoTyperButton => _autoTyperService.GetTyperWrapper().IsEnabled();
 
         public async Task<bool> LoadAsync(Action finishedLoadingAction = null)
         {
@@ -271,7 +272,7 @@ namespace Bit.App.Pages
             CanAccessPremium = await _stateService.CanAccessPremiumAsync();
 
             Fields = Cipher.Fields?
-                        .Select(f => _customFieldItemFactory.CreateCustomFieldItem(f, false, Cipher, this, CopyFieldCommand, null))
+                        .Select(f => _customFieldItemFactory.CreateCustomFieldItem(f, false, Cipher, this, CopyFieldCommand, null, AutoTypeFieldCommand))
                         .ToList();
 
             if (Cipher.Type == Core.Enums.CipherType.Login && !string.IsNullOrWhiteSpace(Cipher.Login.Totp) &&
@@ -288,9 +289,6 @@ namespace Bit.App.Pages
                 var task = _eventService.CollectAsync(Core.Enums.EventType.Cipher_ClientViewed, CipherId);
             }
             _previousCipherId = CipherId;
-            var autoTyperProvider = await _stateService.GetAutoTyperProviderAsync();
-            _autoTyperServiceEnabled = autoTyperProvider != null &&
-                (AutoTyperProviderType)Enum.ToObject(typeof(AutoTyperProviderType), autoTyperProvider) != AutoTyperProviderType.None;
             finishedLoadingAction?.Invoke();
             return true;
         }
@@ -727,7 +725,7 @@ namespace Bit.App.Pages
 
             if (text != null)
             {
-                (await _autoTyperService.GetTyperWrapper()).Type(text);
+                _autoTyperService.GetTyperWrapper().Type(text);
                 if (!string.IsNullOrWhiteSpace(name))
                 {
                     _platformUtilsService.ShowToast("info", null, string.Format(AppResources.AutoTyperSentToTyper, name));

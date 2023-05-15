@@ -45,6 +45,7 @@ namespace Bit.Droid
         private IEventService _eventService;
         private IPushNotificationListenerService _pushNotificationListenerService;
         private ILogger _logger;
+        private IAutoTyperService _autoTyperService;
         private PendingIntent _eventUploadPendingIntent;
         private AppOptions _appOptions;
         private string _activityKey = $"{nameof(MainActivity)}_{Java.Lang.JavaSystem.CurrentTimeMillis().ToString()}";
@@ -69,6 +70,7 @@ namespace Bit.Droid
             _eventService = ServiceContainer.Resolve<IEventService>("eventService");
             _pushNotificationListenerService = ServiceContainer.Resolve<IPushNotificationListenerService>();
             _logger = ServiceContainer.Resolve<ILogger>("logger");
+            _autoTyperService = ServiceContainer.Resolve<IAutoTyperService>("autoTyperService");
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
@@ -84,6 +86,7 @@ namespace Bit.Droid
             });
 
             _logger.InitAsync();
+            _autoTyperService.InitAsync();
 
             var toplayout = Window?.DecorView?.RootView;
             if (toplayout != null)

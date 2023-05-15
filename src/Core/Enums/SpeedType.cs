@@ -2,7 +2,7 @@
 
 namespace Bit.Core.Enums
 {
-    public enum SpeedType : int         // characters per second  - ratio
+    public enum SpeedType : int         // characters per second (aproximate) - ratio
     {
         [LocalizableEnum("Slowest")]    // 8 - 0.1
         Slowest = 0,
