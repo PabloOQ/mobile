@@ -56,12 +56,10 @@
                             SelectedItem="{Binding LayoutTypeSelected}"
                             ItemDisplayBinding="{Binding ., Converter={StaticResource localizableEnum}}"
                             StyleClass="box-value" />
+                        <Label
+                            StyleClass="box-footer-label"
+                            Text="{u:I18n AutoTyperLayoutDescription}" />
                     </StackLayout>
-                    <Label
-                        StyleClass="box-footer-label"
-                        Text="{u:I18n AutoTyperDescription}" />
-                </StackLayout>
-                <StackLayout StyleClass="box">
                     <StackLayout StyleClass="box-row, box-row-input, box-row-input-options-platform">
                         <Label
                             Text="{u:I18n AutoTyperSpeed}"
@@ -72,10 +70,10 @@
                             SelectedItem="{Binding SpeedTypeSelected}"
                             ItemDisplayBinding="{Binding ., Converter={StaticResource localizableEnum}}"
                             StyleClass="box-value" />
+                        <Label
+                            StyleClass="box-footer-label"
+                            Text="{u:I18n AutoTyperSpeedDescription}" />
                     </StackLayout>
-                    <Label
-                        StyleClass="box-footer-label"
-                        Text="{u:I18n AutoTyperDescription}" />
                 </StackLayout>
             </StackLayout>
         </ScrollView>

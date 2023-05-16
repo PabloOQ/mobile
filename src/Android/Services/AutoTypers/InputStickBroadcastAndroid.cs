@@ -29,6 +29,11 @@ namespace Bit.Droid.Services.AutoTypers
                 SpeedToValue(speed));
         }
 
+        public static bool isSupported(bool allowMessages)
+        {
+            return InputStickBroadcast.IsSupported(Application.Context, allowMessages);
+        }
+
         // Layouts
         public static List<LayoutType> GetCompatibleLayouts() => _layouts.Keys.ToList();
 

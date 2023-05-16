@@ -42,7 +42,7 @@ namespace Bit.App.Lists.ItemViewModels.CustomFields
             switch (field.Type)
             {
                 case FieldType.Text:
-                    return new TextCustomFieldItemViewModel(field, isEditing, fieldOptionsCommand, copyFieldCommand);
+                    return new TextCustomFieldItemViewModel(field, isEditing, fieldOptionsCommand, copyFieldCommand, _autoTyper, autoTypeFieldCommand);
                 case FieldType.Boolean:
                     return new BooleanCustomFieldItemViewModel(field, isEditing, fieldOptionsCommand);
                 case FieldType.Hidden:

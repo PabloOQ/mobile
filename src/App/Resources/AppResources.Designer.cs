@@ -1049,6 +1049,15 @@ namespace Bit.App.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The layout must match the one on the device you will typing to..
+        /// </summary>
+        public static string AutoTyperLayoutDescription {
+            get {
+                return ResourceManager.GetString("AutoTyperLayoutDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Greek (Greece).
         /// </summary>
         public static string AutoTyperLayoutELGR {
@@ -1288,6 +1297,15 @@ namespace Bit.App.Resources {
         public static string AutoTyperSpeed {
             get {
                 return ResourceManager.GetString("AutoTyperSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the layout matches but you are getting wrong credentials messages consider lowering the speed. The device might me not picking up all the characters..
+        /// </summary>
+        public static string AutoTyperSpeedDescription {
+            get {
+                return ResourceManager.GetString("AutoTyperSpeedDescription", resourceCulture);
             }
         }
         

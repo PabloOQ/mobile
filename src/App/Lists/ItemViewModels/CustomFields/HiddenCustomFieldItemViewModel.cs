@@ -31,6 +31,7 @@ namespace Bit.App.Lists.ItemViewModels.CustomFields
             _cipher = cipher;
             _passwordPromptable = passwordPromptable;
             _eventService = eventService;
+            _autoTyper = autoTyper;
 
             CopyFieldCommand = new Command(() => copyFieldCommand?.Execute(Field));
             AutoTypeFieldCommand = new Command(() => autoTypeFieldCommand?.Execute(Field));

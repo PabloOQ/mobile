@@ -128,7 +128,7 @@
                         StyleClass="box-row-button, box-row-button-platform"
                         Text="{Binding Source={x:Static core:BitwardenIcons.Clone}}"
                         Command="{Binding CopyCommand}"
-                        Grid.Column="3"
+                        Grid.Column="2"
                         AutomationProperties.IsInAccessibleTree="True"
                         AutomationProperties.Name="{u:I18n CopyUsername}" />
                     <controls:IconButton 

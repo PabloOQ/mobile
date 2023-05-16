@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using Bit.Core.Abstractions;
 using Bit.Core.Models.View;
 using Xamarin.Forms;
 
@@ -6,14 +7,24 @@ namespace Bit.App.Lists.ItemViewModels.CustomFields
 {
     public class TextCustomFieldItemViewModel : BaseCustomFieldItemViewModel
     {
-        public TextCustomFieldItemViewModel(FieldView field, bool isEditing, ICommand fieldOptionsCommand, ICommand copyFieldCommand)
+        private IAutoTyperWrapper _autoTyper;
+        public TextCustomFieldItemViewModel(FieldView field,
+                                            bool isEditing,
+                                            ICommand fieldOptionsCommand,
+                                            ICommand copyFieldCommand,
+                                            IAutoTyperWrapper autoTyper,
+                                            ICommand autoTypeFieldCommand)
             : base(field, isEditing, fieldOptionsCommand)
         {
-            CopyFieldCommand = new Command(() => copyFieldCommand?.Execute(Field));
-        }
+            _autoTyper = autoTyper;
 
+            CopyFieldCommand = new Command(() => copyFieldCommand?.Execute(Field));
+            AutoTypeFieldCommand = new Command(() => autoTypeFieldCommand?.Execute(Field));
+        }
+        public override bool ShowAutoTyperButton => _autoTyper.IsEnabled();
         public override bool ShowCopyButton => !_isEditing && !string.IsNullOrWhiteSpace(Field.Value);
 
+        public ICommand AutoTypeFieldCommand { get; }
         public ICommand CopyFieldCommand { get; }
     }
 }
