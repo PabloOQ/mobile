@@ -2734,9 +2734,9 @@ Do you want to switch to this account?</value>
     <value>Speed</value>
   </data>
   <data name="AutoTyperLayoutDescription" xml:space="preserve">
-    <value>The layout must match the one on the device you will typing to.</value>
+    <value>The layout must match the one on the device you will be typing to.</value>
   </data>
   <data name="AutoTyperSpeedDescription" xml:space="preserve">
-    <value>If the layout matches but you are getting wrong credentials messages consider lowering the speed. The device might me not picking up all the characters.</value>
+    <value>If the layout matches but you are getting wrong credentials messages, then consider lowering the speed. The device might not be picking up all the characters.</value>
   </data>
 </root>

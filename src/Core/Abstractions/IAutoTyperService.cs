@@ -25,6 +25,5 @@ namespace Bit.Core.Abstractions
 
         IAutoTyperProvider CreateTyper(AutoTyperProviderType? type);
         AutoTyperProviderType ProviderType(IAutoTyperProvider? provider);
-
     }
 }
