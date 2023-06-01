@@ -2584,7 +2584,7 @@ Do you want to switch to this account?</value>
     <value>AutoTyper</value>
   </data>
   <data name="AutoTyperDescription" xml:space="preserve">
-    <value>Service to type passwords wirelessly, additional hardware might be required. When enabled some fields in the items in your vault will have a button to type the password  wirelessly.</value>
+    <value>Service to type passwords wirelessly, additional hardware might be required. When enabled some fields in the items of your vault will have a button to type the password  wirelessly.</value>
   </data>
   <data name="AutoTyperInputStick" xml:space="preserve">
     <value>InputStick</value>
