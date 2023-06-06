@@ -21,7 +21,7 @@ namespace Bit.App.Lists.ItemViewModels.CustomFields
             CopyFieldCommand = new Command(() => copyFieldCommand?.Execute(Field));
             AutoTypeFieldCommand = new Command(() => autoTypeFieldCommand?.Execute(Field));
         }
-        public override bool ShowAutoTyperButton => _autoTyper.IsEnabled();
+        public override bool ShowAutoTyperButton => _autoTyper != null && _autoTyper.IsEnabled() && !_isEditing && !string.IsNullOrWhiteSpace(Field.Value);
         public override bool ShowCopyButton => !_isEditing && !string.IsNullOrWhiteSpace(Field.Value);
 
         public ICommand AutoTypeFieldCommand { get; }

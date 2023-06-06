@@ -15,10 +15,9 @@ namespace Bit.App.Utilities
         {
             var i18nService = ServiceContainer.Resolve<II18nService>("i18nService");
             var eventService = ServiceContainer.Resolve<IEventService>("eventService");
-            var autoTyper = ServiceContainer.Resolve<IAutoTyperService>("autoTyperService").GetTyperWrapper(); 
 
             // TODO: This could be further improved by Lazy Registration since it may not be needed at all
-            ServiceContainer.Register<ICustomFieldItemFactory>("customFieldItemFactory", new CustomFieldItemFactory(i18nService, eventService, autoTyper));
+            ServiceContainer.Register<ICustomFieldItemFactory>("customFieldItemFactory", new CustomFieldItemFactory(i18nService, eventService));
         }
     }
 }

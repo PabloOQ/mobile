@@ -56,7 +56,7 @@ namespace Bit.App.Lists.ItemViewModels.CustomFields
 
         public bool ShowViewHidden => _cipher.ViewPassword || (_isEditing && _field.NewField);
 
-        public override bool ShowAutoTyperButton => _autoTyper.IsEnabled();
+        public override bool ShowAutoTyperButton => _autoTyper != null && _autoTyper.IsEnabled() && !_isEditing && _cipher.ViewPassword && !string.IsNullOrWhiteSpace(Field.Value);
 
         public override bool ShowCopyButton => !_isEditing && _cipher.ViewPassword && !string.IsNullOrWhiteSpace(Field.Value);
 

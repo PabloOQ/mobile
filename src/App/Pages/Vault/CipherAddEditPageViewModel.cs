@@ -422,7 +422,7 @@ namespace Bit.App.Pages
                 }
                 if (Cipher.Fields != null)
                 {
-                    Fields.ResetWithRange(Cipher.Fields?.Select(f => _customFieldItemFactory.CreateCustomFieldItem(f, true, Cipher, null, null, FieldOptionsCommand, null)));
+                    Fields.ResetWithRange(Cipher.Fields?.Select(f => _customFieldItemFactory.CreateCustomFieldItem(f, true, Cipher, null, null, FieldOptionsCommand, null, null)));
                 }
             }
 
@@ -738,7 +738,7 @@ namespace Bit.App.Pages
                     Type = type,
                     Name = string.IsNullOrWhiteSpace(name) ? null : name,
                     NewField = true,
-                }, true, Cipher, null, null, FieldOptionsCommand, null));
+                }, true, Cipher, null, null, FieldOptionsCommand, null, null));
             }
         }
 

@@ -271,8 +271,9 @@ namespace Bit.App.Pages
             Cipher = await cipher.DecryptAsync();
             CanAccessPremium = await _stateService.CanAccessPremiumAsync();
 
+            await _autoTyperService.InitAsync();
             Fields = Cipher.Fields?
-                        .Select(f => _customFieldItemFactory.CreateCustomFieldItem(f, false, Cipher, this, CopyFieldCommand, null, AutoTypeFieldCommand))
+                        .Select(f => _customFieldItemFactory.CreateCustomFieldItem(f, false, Cipher, this, CopyFieldCommand, null, _autoTyperService.GetTyperWrapper(), AutoTypeFieldCommand))
                         .ToList();
 
             if (Cipher.Type == Core.Enums.CipherType.Login && !string.IsNullOrWhiteSpace(Cipher.Login.Totp) &&

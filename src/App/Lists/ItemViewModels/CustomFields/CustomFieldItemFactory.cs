@@ -15,6 +15,7 @@ namespace Bit.App.Lists.ItemViewModels.CustomFields
                                                         IPasswordPromptable passwordPromptable,
                                                         ICommand copyFieldCommand,
                                                         ICommand fieldOptionsCommand,
+                                                        IAutoTyperWrapper autoTyper,
                                                         ICommand autoTypeFieldCommand);
     }
 
@@ -22,13 +23,11 @@ namespace Bit.App.Lists.ItemViewModels.CustomFields
     {
         readonly II18nService _i18nService;
         readonly IEventService _eventService;
-        readonly IAutoTyperWrapper _autoTyper;
 
-        public CustomFieldItemFactory(II18nService i18nService, IEventService eventService, IAutoTyperWrapper autoTyper)
+        public CustomFieldItemFactory(II18nService i18nService, IEventService eventService)
         {
             _i18nService = i18nService;
             _eventService = eventService;
-            _autoTyper = autoTyper;
         }
 
         public ICustomFieldItemViewModel CreateCustomFieldItem(FieldView field,
@@ -37,16 +36,17 @@ namespace Bit.App.Lists.ItemViewModels.CustomFields
                                                                IPasswordPromptable passwordPromptable,
                                                                ICommand copyFieldCommand,
                                                                ICommand fieldOptionsCommand,
+                                                               IAutoTyperWrapper autoTyper,
                                                                ICommand autoTypeFieldCommand)
         {
             switch (field.Type)
             {
                 case FieldType.Text:
-                    return new TextCustomFieldItemViewModel(field, isEditing, fieldOptionsCommand, copyFieldCommand, _autoTyper, autoTypeFieldCommand);
+                    return new TextCustomFieldItemViewModel(field, isEditing, fieldOptionsCommand, copyFieldCommand, autoTyper, autoTypeFieldCommand);
                 case FieldType.Boolean:
                     return new BooleanCustomFieldItemViewModel(field, isEditing, fieldOptionsCommand);
                 case FieldType.Hidden:
-                    return new HiddenCustomFieldItemViewModel(field, isEditing, fieldOptionsCommand, cipher, passwordPromptable, _eventService, copyFieldCommand, _autoTyper, autoTypeFieldCommand);
+                    return new HiddenCustomFieldItemViewModel(field, isEditing, fieldOptionsCommand, cipher, passwordPromptable, _eventService, copyFieldCommand, autoTyper, autoTypeFieldCommand);
                 case FieldType.Linked:
                     return new LinkedCustomFieldItemViewModel(field, isEditing, fieldOptionsCommand, cipher, _i18nService);
                 default:
